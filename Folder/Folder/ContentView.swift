@@ -23,9 +23,12 @@ struct ContentView: View {
     private var loginView: some View {
         VStack(spacing: 24) {
             Spacer()
-            Image(systemName: "folder.fill")
-                .font(.system(size: 64))
-                .foregroundStyle(.blue)
+            if let uiImage = UIImage(named: "AppIcon") {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                    .clipShape(RoundedRectangle(cornerRadius: 18))
+            }
             Text("Folder")
                 .font(.largeTitle.bold())
             Text("Connect your WordPress.com account to share content directly from any app.")
