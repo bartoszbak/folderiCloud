@@ -1,0 +1,6 @@
+.DS_Store
+xcuserdata/
+*.xcuserstate
+
+# Secrets — never commit
+Folder/Folder/WordPressSecrets.swift
