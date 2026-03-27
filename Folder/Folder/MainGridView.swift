@@ -30,7 +30,6 @@ struct MainGridView: View {
     @State private var showAccount = false
 
     // Sheet presentations
-    @State private var showPhotoComposer = false
     @State private var showTextComposer = false
     @State private var showLinkComposer = false
     @State private var showFilePicker = false
@@ -38,7 +37,6 @@ struct MainGridView: View {
 
     // Photo
     @State private var selectedPhotoItems: [PhotosPickerItem] = []
-    @State private var singlePhotoData: Data?
 
     // Filter
     @State private var activeFilter: PostType? = nil
@@ -170,13 +168,6 @@ struct MainGridView: View {
         }
 
         // Composer modals
-        .sheet(isPresented: $showPhotoComposer) {
-            if let token = auth.token, let site = auth.selectedSite {
-                PhotoComposerSheet(token: token, site: site, photoData: singlePhotoData) { label, action in
-                    startPosting(label: label, action: action)
-                }
-            }
-        }
         .sheet(isPresented: $showTextComposer) {
             if let token = auth.token, let site = auth.selectedSite {
                 TextComposerSheet(token: token, site: site) { label, action in
@@ -215,22 +206,17 @@ struct MainGridView: View {
         let captured = items
         selectedPhotoItems = []
 
-        if captured.count == 1 {
-            singlePhotoData = try? await captured[0].loadTransferable(type: Data.self)
-            showPhotoComposer = true
-        } else {
-            var photos: [Data] = []
-            for item in captured {
-                if let data = try? await item.loadTransferable(type: Data.self) {
-                    photos.append(data)
-                }
+        var photos: [Data] = []
+        for item in captured {
+            if let data = try? await item.loadTransferable(type: Data.self) {
+                photos.append(data)
             }
-            guard let pm = postManager, !photos.isEmpty else { return }
-            let count = photos.count
-            startPosting(label: "\(count) photos") {
-                for data in photos {
-                    try await pm.postPhoto(data: data, caption: "")
-                }
+        }
+        guard let pm = postManager, !photos.isEmpty else { return }
+        let label = photos.count == 1 ? "Photo" : "\(photos.count) photos"
+        startPosting(label: label) {
+            for data in photos {
+                try await pm.postPhoto(data: data, caption: "")
             }
         }
     }
@@ -546,57 +532,6 @@ struct TypeSelectionSheet: View {
     }
 }
 
-// MARK: - Photo Composer Sheet
-
-struct PhotoComposerSheet: View {
-    let token: String
-    let site: WordPressSite
-    let photoData: Data?
-    let onPost: (String, @escaping () async throws -> Void) -> Void
-
-    @Environment(\.dismiss) private var dismiss
-    @State private var caption = ""
-
-    private var postManager: WordPressPostManager { WordPressPostManager(token: token, site: site) }
-
-    var body: some View {
-        NavigationStack {
-            Form {
-                if let data = photoData, let uiImage = UIImage(data: data) {
-                    Section {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxHeight: 220)
-                            .frame(maxWidth: .infinity)
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                            .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-                    }
-                }
-                Section("Caption (optional)") {
-                    TextField("Add a caption", text: $caption)
-                }
-            }
-            .navigationTitle("Photo")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Post") {
-                        let data = photoData; let cap = caption; let pm = postManager
-                        onPost("Photo") {
-                            guard let data else { return }
-                            try await pm.postPhoto(data: data, caption: cap)
-                        }
-                        dismiss()
-                    }
-                    .disabled(photoData == nil)
-                }
-            }
-        }
-    }
-}
-
 // MARK: - Text Composer Sheet
 
 struct TextComposerSheet: View {
@@ -649,6 +584,8 @@ struct LinkComposerSheet: View {
     @Environment(\.dismiss) private var dismiss
     @State private var url = ""
     @State private var title = ""
+    @State private var linkDescription = ""
+    @State private var fetcher = LinkMetadataFetcher()
     @FocusState private var focused: Bool
 
     private var postManager: WordPressPostManager { WordPressPostManager(token: token, site: site) }
@@ -662,9 +599,50 @@ struct LinkComposerSheet: View {
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .focused($focused)
+
+                    if fetcher.isFetching {
+                        HStack(spacing: 8) {
+                            ProgressView().scaleEffect(0.75)
+                            Text("Fetching page info…")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    } else if fetcher.fetchedTitle != nil || fetcher.fetchedDescription != nil {
+                        HStack(alignment: .top, spacing: 10) {
+                            Group {
+                                if let favicon = fetcher.favicon {
+                                    Image(uiImage: favicon)
+                                        .resizable()
+                                        .scaledToFill()
+                                } else {
+                                    Image(systemName: "globe")
+                                        .foregroundStyle(.secondary)
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                }
+                            }
+                            .frame(width: 24, height: 24)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                if let t = fetcher.fetchedTitle {
+                                    Text(t).font(.subheadline).lineLimit(2)
+                                }
+                                if let d = fetcher.fetchedDescription {
+                                    Text(d).font(.caption).foregroundStyle(.secondary).lineLimit(3)
+                                }
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
                 }
+
                 Section("Title (optional)") {
-                    TextField("Description", text: $title)
+                    TextField("Add a title", text: $title)
+                }
+
+                Section("Description (optional)") {
+                    TextField("Add a description", text: $linkDescription, axis: .vertical)
+                        .lineLimit(3...)
                 }
             }
             .navigationTitle("Link")
@@ -673,8 +651,8 @@ struct LinkComposerSheet: View {
                 ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Post") {
-                        let u = url; let t = title; let pm = postManager
-                        onPost("Link") { try await pm.postLink(url: u, title: t) }
+                        let u = url; let t = title; let d = linkDescription; let pm = postManager
+                        onPost("Link") { try await pm.postLink(url: u, title: t, description: d) }
                         dismiss()
                     }
                     .disabled(url.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -684,6 +662,18 @@ struct LinkComposerSheet: View {
         .task {
             try? await Task.sleep(for: .milliseconds(300))
             focused = true
+        }
+        .onChange(of: url) { _, newURL in
+            // Clear fields and re-fetch whenever the URL changes
+            title = ""
+            linkDescription = ""
+            fetcher.schedule(urlString: newURL)
+        }
+        .onChange(of: fetcher.fetchedTitle) { _, newTitle in
+            title = newTitle ?? ""
+        }
+        .onChange(of: fetcher.fetchedDescription) { _, newDesc in
+            linkDescription = newDesc ?? ""
         }
     }
 }
@@ -726,6 +716,19 @@ struct AccountSheet: View {
     var body: some View {
         NavigationStack {
             List {
+                if let uiImage = UIImage(named: "AppIconDisplay") {
+                    Section {
+                        HStack {
+                            Spacer()
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .frame(width: 96, height: 96)
+                                .clipShape(RoundedRectangle(cornerRadius: 14))
+                            Spacer()
+                        }
+                        .listRowBackground(Color.clear)
+                    }
+                }
                 Section("Logged as") {
                     HStack(spacing: 14) {
                         AvatarButton(url: auth.user?.avatarURL, size: 72)

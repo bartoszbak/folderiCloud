@@ -21,6 +21,19 @@ final class WordPressAuthManager: NSObject {
             let stored = KeychainHelper.loadToken()
             let site = Self.loadSelectedSite()
             let user = Self.loadUser()
+            // Keep App Group in sync so the Share Extension always has fresh credentials
+            // even if selectSite() was called on a previous install or the group data was cleared.
+            let appGroup = UserDefaults(suiteName: KeychainHelper.appGroup)
+            if let stored {
+                appGroup?.set(stored, forKey: "shared_token")
+            } else {
+                appGroup?.removeObject(forKey: "shared_token")
+            }
+            if let site, let data = try? JSONEncoder().encode(site) {
+                appGroup?.set(data, forKey: "shared_site")
+            } else {
+                appGroup?.removeObject(forKey: "shared_site")
+            }
             await MainActor.run { [weak self] in
                 self?.token = stored
                 self?.selectedSite = site
@@ -72,6 +85,8 @@ final class WordPressAuthManager: NSObject {
         KeychainHelper.deleteToken()
         UserDefaults.standard.removeObject(forKey: Self.selectedSiteKey)
         UserDefaults.standard.removeObject(forKey: Self.userKey)
+        let appGroup = UserDefaults(suiteName: KeychainHelper.appGroup)
+        appGroup?.removeObject(forKey: "shared_site")
         token = nil
         selectedSite = nil
         sites = []

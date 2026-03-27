@@ -58,9 +58,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		BB0000102F755D9A00FB6AEE /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		BB0000102F755D9A00FB6AEE /* Exceptions for "Folder" folder in "FolderShare" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				MediaUploadSession.swift,
 				WordPressPostManager.swift,
 				WordPressSite.swift,
 			);
@@ -72,7 +73,7 @@
 		5EA130782F755D9A00FB6AEE /* Folder */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				BB0000102F755D9A00FB6AEE /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
+				BB0000102F755D9A00FB6AEE /* Exceptions for "Folder" folder in "FolderShare" target */,
 			);
 			path = Folder;
 			sourceTree = "<group>";
@@ -508,6 +509,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Folder/Folder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TJ3ALYQV5G;
@@ -540,6 +542,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Folder/Folder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TJ3ALYQV5G;
@@ -654,11 +657,12 @@
 		BB0000072F755D9A00FB6AEE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = FolderShare/FolderShare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TJ3ALYQV5G;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = FolderShare-Info.plist;
+				INFOPLIST_FILE = "FolderShare-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -680,11 +684,12 @@
 		BB0000082F755D9A00FB6AEE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = FolderShare/FolderShare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TJ3ALYQV5G;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = FolderShare-Info.plist;
+				INFOPLIST_FILE = "FolderShare-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

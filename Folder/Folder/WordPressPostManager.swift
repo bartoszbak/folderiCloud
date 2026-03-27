@@ -30,9 +30,10 @@ struct WordPressPostManager {
         try await createPost(title: title, content: text, format: "aside")
     }
 
-    func postLink(url: String, title: String) async throws {
+    func postLink(url: String, title: String, description: String = "") async throws {
         let resolvedTitle = title.isEmpty ? (URL(string: url)?.host ?? url) : title
-        let content = "<a href=\"\(url)\">\(resolvedTitle)</a>"
+        var content = "<a href=\"\(url)\">\(resolvedTitle)</a>"
+        if !description.isEmpty { content += "\n\n<p>\(description)</p>" }
         try await createPost(title: resolvedTitle, content: content, format: "link")
     }
 
@@ -90,10 +91,10 @@ struct WordPressPostManager {
         request.httpMethod = "POST"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        request.httpBody = body
 
-        let (responseData, response) = try await URLSession.shared.data(for: request)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+        // Upload via background URLSession so the transfer continues if the user switches apps.
+        let (responseData, response) = try await MediaUploadSession.shared.upload(body: body, request: request)
+        guard response.statusCode == 200 else {
             let detail = String(data: responseData, encoding: .utf8) ?? "unknown"
             throw PostError.uploadFailed(detail)
         }
