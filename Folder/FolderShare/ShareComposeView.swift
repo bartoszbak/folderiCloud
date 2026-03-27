@@ -107,7 +107,7 @@ struct ShareComposeView: View {
     private func post() async {
         isPosting = true
         errorMessage = nil
-        let manager = WordPressPostManager(token: token, site: site)
+        let manager = WordPressPostManager(token: token, site: site, useBackgroundSession: false)
 
         do {
             for item in items {

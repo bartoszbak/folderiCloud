@@ -3,6 +3,7 @@ import Foundation
 struct WordPressPostManager {
     let token: String
     let site: WordPressSite
+    var useBackgroundSession: Bool = true
 
     // MARK: - Fetch
 
@@ -92,8 +93,15 @@ struct WordPressPostManager {
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
-        // Upload via background URLSession so the transfer continues if the user switches apps.
-        let (responseData, response) = try await MediaUploadSession.shared.upload(body: body, request: request)
+        let (responseData, response): (Data, HTTPURLResponse)
+        if useBackgroundSession {
+            (responseData, response) = try await MediaUploadSession.shared.upload(body: body, request: request)
+        } else {
+            request.httpBody = body
+            let (data, urlResponse) = try await URLSession.shared.data(for: request)
+            guard let httpResponse = urlResponse as? HTTPURLResponse else { throw PostError.uploadFailed("Invalid response") }
+            (responseData, response) = (data, httpResponse)
+        }
         guard response.statusCode == 200 else {
             let detail = String(data: responseData, encoding: .utf8) ?? "unknown"
             throw PostError.uploadFailed(detail)
