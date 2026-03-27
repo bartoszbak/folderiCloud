@@ -16,13 +16,13 @@ final class MediaUploadSession: NSObject {
         return URLSession(configuration: config, delegate: self, delegateQueue: nil)
     }()
 
-    private struct PendingUpload {
+    private struct PendingUpload: @unchecked Sendable {
         var responseData = Data()
         let continuation: CheckedContinuation<(Data, HTTPURLResponse), Error>
         let tempURL: URL
     }
 
-    private var pending: [Int: PendingUpload] = [:]
+    nonisolated(unsafe) private var pending: [Int: PendingUpload] = [:]
     private let lock = NSLock()
 
     private override init() { super.init() }
@@ -47,7 +47,7 @@ final class MediaUploadSession: NSObject {
 // MARK: - URLSessionDataDelegate
 
 extension MediaUploadSession: URLSessionDataDelegate {
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+    nonisolated func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         lock.lock()
         pending[dataTask.taskIdentifier]?.responseData.append(data)
         lock.unlock()
@@ -57,7 +57,7 @@ extension MediaUploadSession: URLSessionDataDelegate {
 // MARK: - URLSessionTaskDelegate
 
 extension MediaUploadSession: URLSessionTaskDelegate {
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    nonisolated func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         lock.lock()
         guard let upload = pending.removeValue(forKey: task.taskIdentifier) else {
             lock.unlock()
@@ -78,8 +78,8 @@ extension MediaUploadSession: URLSessionTaskDelegate {
         upload.continuation.resume(returning: (upload.responseData, httpResponse))
     }
 
-    func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
-        DispatchQueue.main.async { [weak self] in
+    nonisolated func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        Task { @MainActor [weak self] in
             self?.backgroundCompletionHandler?()
             self?.backgroundCompletionHandler = nil
         }

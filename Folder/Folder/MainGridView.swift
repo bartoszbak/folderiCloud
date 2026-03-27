@@ -716,13 +716,13 @@ struct AccountSheet: View {
     var body: some View {
         NavigationStack {
             List {
-                if let uiImage = UIImage(named: "AppIcon") {
+                if let uiImage = UIImage(named: "AppIconDisplay") {
                     Section {
                         HStack {
                             Spacer()
                             Image(uiImage: uiImage)
                                 .resizable()
-                                .frame(width: 64, height: 64)
+                                .frame(width: 96, height: 96)
                                 .clipShape(RoundedRectangle(cornerRadius: 14))
                             Spacer()
                         }

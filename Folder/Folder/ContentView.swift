@@ -23,10 +23,10 @@ struct ContentView: View {
     private var loginView: some View {
         VStack(spacing: 24) {
             Spacer()
-            if let uiImage = UIImage(named: "AppIcon") {
+            if let uiImage = UIImage(named: "AppIconDisplay") {
                 Image(uiImage: uiImage)
                     .resizable()
-                    .frame(width: 80, height: 80)
+                    .frame(width: 96, height: 96)
                     .clipShape(RoundedRectangle(cornerRadius: 18))
             }
             Text("Folder")
