@@ -8,6 +8,7 @@ final class WordPressAuthManager: NSObject {
     private(set) var selectedSite: WordPressSite?
     private(set) var user: WordPressUser?
     private(set) var isFetchingSites = false
+    private(set) var isReady = false
 
     var isAuthenticated: Bool { token != nil }
 
@@ -38,6 +39,7 @@ final class WordPressAuthManager: NSObject {
                 self?.token = stored
                 self?.selectedSite = site
                 self?.user = user
+                self?.isReady = true
             }
         }
     }

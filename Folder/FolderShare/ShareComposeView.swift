@@ -1,5 +1,7 @@
 import SwiftUI
+import UIKit
 import UniformTypeIdentifiers
+import LinkPresentation
 
 // MARK: - SharedItem
 
@@ -8,6 +10,36 @@ enum SharedItem {
     case url(String)
     case text(String)
     case file(URL)
+}
+
+// MARK: - Share Link Fetcher
+
+@Observable
+final class ShareLinkFetcher {
+    var isFetching = false
+    var fetchedTitle: String?
+    var favicon: UIImage?
+
+    func fetch(urlString: String) {
+        guard let url = URL(string: urlString),
+              url.scheme == "https" || url.scheme == "http" else { return }
+        isFetching = true
+        Task { @MainActor in
+            let provider = LPMetadataProvider()
+            provider.shouldFetchSubresources = false
+            if let meta = try? await provider.startFetchingMetadata(for: url) {
+                self.fetchedTitle = meta.title
+                if let iconProvider = meta.iconProvider {
+                    iconProvider.loadObject(ofClass: UIImage.self) { obj, _ in
+                        if let img = obj as? UIImage {
+                            Task { @MainActor in self.favicon = img }
+                        }
+                    }
+                }
+            }
+            self.isFetching = false
+        }
+    }
 }
 
 // MARK: - ShareComposeView
@@ -22,6 +54,12 @@ struct ShareComposeView: View {
     @State private var note: String = ""
     @State private var isPosting = false
     @State private var errorMessage: String? = nil
+    @State private var linkFetcher = ShareLinkFetcher()
+
+    private var isURL: Bool {
+        if case .url = items.first { return true }
+        return false
+    }
 
     var body: some View {
         NavigationStack {
@@ -33,9 +71,9 @@ struct ShareComposeView: View {
                     }
                 }
 
-                // Note section
-                Section("Note (optional)") {
-                    TextField("Add a note…", text: $note, axis: .vertical)
+                // Note / Title section
+                Section(isURL ? "Title (optional)" : "Note (optional)") {
+                    TextField(isURL ? "Add a title…" : "Add a note…", text: $note, axis: .vertical)
                         .lineLimit(3...6)
                 }
 
@@ -69,6 +107,14 @@ struct ShareComposeView: View {
             }
             .interactiveDismissDisabled(isPosting)
         }
+        .task {
+            if case .url(let urlString) = items.first {
+                linkFetcher.fetch(urlString: urlString)
+            }
+        }
+        .onChange(of: linkFetcher.fetchedTitle) { _, title in
+            if note.isEmpty, let title { note = title }
+        }
     }
 
     // MARK: - Item Preview
@@ -87,10 +133,41 @@ struct ShareComposeView: View {
                 Label("Image", systemImage: "photo")
             }
         case .url(let urlString):
-            Label(urlString, systemImage: "link")
-                .lineLimit(2)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+            if linkFetcher.isFetching {
+                HStack(spacing: 8) {
+                    ProgressView().scaleEffect(0.75)
+                    Text("Fetching link info…")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            } else {
+                HStack(alignment: .top, spacing: 10) {
+                    Group {
+                        if let favicon = linkFetcher.favicon {
+                            Image(uiImage: favicon)
+                                .resizable()
+                                .scaledToFill()
+                        } else {
+                            Image(systemName: "globe")
+                                .foregroundStyle(.secondary)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
+                    }
+                    .frame(width: 24, height: 24)
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        if let title = linkFetcher.fetchedTitle {
+                            Text(title).font(.subheadline).lineLimit(2)
+                        }
+                        Text(urlString)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(2)
+                    }
+                }
+                .padding(.vertical, 4)
+            }
         case .text(let text):
             Text(text)
                 .lineLimit(4)

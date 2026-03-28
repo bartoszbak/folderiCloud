@@ -16,6 +16,7 @@ struct FolderApp: App {
         WindowGroup {
             ContentView()
                 .environment(auth)
+                .fontDesign(.rounded)
         }
     }
 }

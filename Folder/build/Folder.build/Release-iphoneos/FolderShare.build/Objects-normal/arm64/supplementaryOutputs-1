@@ -1,0 +1,12 @@
+{
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/MediaUploadSession.swift" : {
+    "abi-baseline-json" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/FolderShare.build/Objects-normal/arm64/FolderShare.abi.json",
+    "const-values" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/FolderShare.build/Objects-normal/arm64/FolderShare-primary.swiftconstvalues",
+    "dependencies" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/FolderShare.build/Objects-normal/arm64/FolderShare-primary.d",
+    "diagnostics" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/FolderShare.build/Objects-normal/arm64/FolderShare-primary.dia",
+    "objc-header" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/FolderShare.build/Objects-normal/arm64/FolderShare-Swift.h",
+    "swiftdoc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/FolderShare.build/Objects-normal/arm64/FolderShare.swiftdoc",
+    "swiftmodule" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/FolderShare.build/Objects-normal/arm64/FolderShare.swiftmodule",
+    "swiftsourceinfo" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/FolderShare.build/Objects-normal/arm64/FolderShare.swiftsourceinfo"
+  }
+}

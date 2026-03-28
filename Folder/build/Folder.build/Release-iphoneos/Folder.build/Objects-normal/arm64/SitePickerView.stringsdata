@@ -1,0 +1,64 @@
+{
+  "source": "/Users/bartbak/Repo/FolderApp/Folder/Folder/SitePickerView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Choose a Site",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 45
+        }
+      },
+      {
+        "comment": "",
+        "key": "No WordPress.com sites were found for your account.",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 25
+        }
+      },
+      {
+        "comment": "",
+        "key": "Loading your sites…",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 11
+        }
+      },
+      {
+        "comment": "",
+        "key": "No Sites Found",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 23
+        }
+      },
+      {
+        "comment": "",
+        "key": "Couldn't Load Sites",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 15
+        }
+      },
+      {
+        "comment": "",
+        "key": "Retry",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 19
+        }
+      },
+      {
+        "comment": "",
+        "key": "Disconnect",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 48
+        }
+      }
+    ]
+  },
+  "version": 1
+}

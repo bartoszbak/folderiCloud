@@ -1,0 +1,76 @@
+{
+  "" : {
+    "const-values" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.swiftconstvalues",
+    "dependencies" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.d",
+    "diagnostics" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.dia",
+    "emit-module-dependencies" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary-emit-module.dia",
+    "pch" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.swiftdeps"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/AppDelegate.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/AppDelegate.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/AppDelegate.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/AppDelegate.o"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/ContentView.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/ContentView.o"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/FolderApp.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderApp.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderApp.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderApp.o"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/KeychainHelper.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/KeychainHelper.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/KeychainHelper.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/KeychainHelper.o"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/LinkMetadataFetcher.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkMetadataFetcher.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkMetadataFetcher.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkMetadataFetcher.o"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/MainGridView.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/MainGridView.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/MainGridView.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/MainGridView.o"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/MediaUploadSession.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/MediaUploadSession.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/MediaUploadSession.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/MediaUploadSession.o"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/SitePickerView.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SitePickerView.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SitePickerView.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SitePickerView.o"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/WordPressAuthManager.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressAuthManager.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressAuthManager.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressAuthManager.o"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/WordPressPostManager.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressPostManager.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressPostManager.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressPostManager.o"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/WordPressSecrets.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressSecrets.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressSecrets.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressSecrets.o"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/Folder/WordPressSite.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressSite.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressSite.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressSite.o"
+  },
+  "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/GeneratedAssetSymbols.o"
+  }
+}

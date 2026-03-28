@@ -3,6 +3,9 @@ import PhotosUI
 import UniformTypeIdentifiers
 import QuickLook
 import QuickLookThumbnailing
+import LinkPresentation
+import AVKit
+import PDFKit
 
 // MARK: - Post Status
 
@@ -40,6 +43,7 @@ struct MainGridView: View {
 
     // Filter
     @State private var activeFilter: PostType? = nil
+    @State private var hasLoaded = false
 
     // Posting status
     @State private var postStatus: PostStatus?
@@ -62,38 +66,53 @@ struct MainGridView: View {
         return WordPressPostManager(token: token, site: site)
     }
 
-    var body: some View {
-        NavigationStack {
-            Group {
-                if isLoading && posts.isEmpty {
-                    ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else if let error = loadError, posts.isEmpty {
-                    ContentUnavailableView {
-                        Label("Couldn't Load", systemImage: "exclamationmark.triangle")
-                    } description: {
-                        Text(error)
-                    } actions: {
-                        Button("Retry") { Task { await loadPosts() } }
+    @ViewBuilder
+    private var feedContent: some View {
+        if (isLoading || !hasLoaded) && posts.isEmpty {
+            ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else if let error = loadError, posts.isEmpty {
+            ContentUnavailableView {
+                Label("Couldn't Load", systemImage: "exclamationmark.triangle")
+            } description: {
+                Text(error)
+            } actions: {
+                Button("Retry") { Task { await loadPosts() } }
+            }
+        } else if posts.isEmpty {
+            ContentUnavailableView(
+                "Nothing here yet",
+                systemImage: "folder",
+                description: Text("Tap + to add your first post.")
+            )
+        } else {
+            List(filteredPosts) { post in
+                ZStack(alignment: .leading) {
+                    if let token = auth.token, let site = auth.selectedSite {
+                        NavigationLink {
+                            PostDetailView(post: post, token: token, site: site) {
+                                posts.removeAll { $0.id == post.id }
+                            }
+                        } label: { EmptyView() }
+                            .opacity(0)
                     }
-                } else if posts.isEmpty {
-                    ContentUnavailableView(
-                        "Nothing here yet",
-                        systemImage: "folder",
-                        description: Text("Tap + to add your first post.")
-                    )
-                } else {
-                    List(filteredPosts) { post in PostRowView(post: post) }
-                        .listStyle(.plain)
-                        .refreshable { await loadPosts() }
+                    PostRowView(post: post)
                 }
             }
+            .listStyle(.plain)
+            .refreshable { await loadPosts() }
+        }
+    }
+
+    var body: some View {
+        NavigationStack {
+            feedContent
             .navigationTitle("Folder")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button { showAccount = true } label: {
                         AvatarButton(url: auth.user?.avatarURL)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.borderless)
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Menu {
@@ -113,7 +132,7 @@ struct MainGridView: View {
                             Label("Files", systemImage: "doc")
                         }
                     } label: {
-                        Image(systemName: activeFilter == nil ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
+                        Image(systemName: "line.3.horizontal.decrease")
                             .fontWeight(.semibold)
                     }
                 }
@@ -135,17 +154,10 @@ struct MainGridView: View {
                             Label("Files", systemImage: "doc")
                         }
                     } label: {
-                        ZStack {
-                            Circle()
-                                .fill(.black)
-                                .frame(width: 44, height: 44)
-                            Image(systemName: "plus")
-                                .font(.system(size: 18, weight: .semibold))
-                                .foregroundStyle(.white)
-                        }
+                        Image(systemName: "plus")
+                            .fontWeight(.semibold)
                     }
                     .menuStyle(.button)
-                    .buttonStyle(.plain)
                 }
             }
         }
@@ -263,12 +275,15 @@ struct MainGridView: View {
         guard let pm = postManager else { return }
         isLoading = true
         loadError = nil
+        defer {
+            isLoading = false
+            hasLoaded = true
+        }
         do {
             posts = try await pm.fetchPosts()
         } catch {
             loadError = error.localizedDescription
         }
-        isLoading = false
     }
 }
 
@@ -281,16 +296,16 @@ struct PostStatusBar: View {
         HStack(spacing: 12) {
             Group {
                 if status.kind == .posting {
-                    ProgressView().tint(.white)
+                    ProgressView().tint(Color(.systemBackground))
                 } else {
                     Image(systemName: status.kind == .success ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
                 }
             }
-            .foregroundStyle(.white)
+            .foregroundStyle(Color(.systemBackground))
 
             Text(status.message)
                 .font(.subheadline.weight(.medium))
-                .foregroundStyle(.white)
+                .foregroundStyle(Color(.systemBackground))
                 .lineLimit(1)
 
             Spacer()
@@ -315,10 +330,6 @@ struct PostStatusBar: View {
 struct PostRowView: View {
     let post: WordPressPost
 
-    @State private var previewURL: URL?
-    @State private var isDownloading = false
-    @State private var downloadError: String?
-
     private var dateText: String {
         if Calendar.current.isDateInToday(post.date) {
             return post.date.formatted(date: .omitted, time: .shortened)
@@ -329,21 +340,26 @@ struct PostRowView: View {
 
     private var isFile: Bool { post.tagSlugs.contains("folder-file") }
 
-    private static func fileIcon(for filename: String) -> (symbol: String, color: Color) {
+    static func fileIcon(for filename: String) -> (symbol: String, color: Color) {
         let ext = (filename as NSString).pathExtension.lowercased()
+        let symbol: String
         switch ext {
-        case "pdf":                              return ("doc.richtext.fill",           .red)
-        case "doc", "docx":                      return ("doc.text.fill",               .blue)
-        case "xls", "xlsx", "csv":               return ("tablecells.fill",             .green)
-        case "ppt", "pptx":                      return ("rectangle.on.rectangle.fill", .orange)
-        case "zip", "rar", "gz", "tar":          return ("archivebox.fill",             .brown)
-        case "mp3", "m4a", "wav", "aac":         return ("music.note",                  .pink)
-        case "mp4", "mov", "avi", "mkv":         return ("video.fill",                  .purple)
-        case "txt", "md":                        return ("doc.plaintext.fill",          .secondary)
-        case "jpg", "jpeg", "png", "gif", "heic":return ("photo.fill",                  .teal)
-        default:                                 return ("doc.fill",                    .secondary)
+        case "pdf":                              symbol = "doc.richtext.fill"
+        case "doc", "docx":                      symbol = "doc.text.fill"
+        case "xls", "xlsx", "csv":               symbol = "tablecells.fill"
+        case "ppt", "pptx":                      symbol = "rectangle.on.rectangle.fill"
+        case "zip", "rar", "gz", "tar":          symbol = "archivebox.fill"
+        case "mp3", "m4a", "wav", "aac":         symbol = "music.note"
+        case "mp4", "mov", "avi", "mkv", "m4v":  symbol = "video.fill"
+        case "txt", "md":                        symbol = "doc.plaintext.fill"
+        case "jpg", "jpeg", "png", "gif", "heic":symbol = "photo.fill"
+        default:                                 symbol = "doc.fill"
         }
+        return (symbol, .blue)
     }
+
+    static let videoExtensions: Set<String> = ["mp4", "mov", "avi", "mkv", "m4v"]
+    static let imageExtensions: Set<String> = ["jpg", "jpeg", "png", "gif", "heic", "webp"]
 
     private func cachedFileURL() -> URL {
         FileManager.default.temporaryDirectory
@@ -352,67 +368,55 @@ struct PostRowView: View {
 
     var body: some View {
         let fileInfo = PostRowView.fileIcon(for: post.displayTitle)
-
-        Button {
-            guard isFile, post.fileURL != nil else { return }
-            Task { await downloadAndPreview() }
-        } label: {
-            HStack(spacing: 12) {
-                if isFile {
-                    FileThumbnailView(
-                        remoteURL: post.fileURL,
-                        localURL: cachedFileURL(),
-                        symbol: fileInfo.symbol,
-                        color: fileInfo.color,
-                        isDownloading: isDownloading
-                    )
-                } else if let urlString = post.featuredImageURL, let url = URL(string: urlString) {
+        HStack(spacing: 12) {
+            if isFile {
+                let ext = (post.displayTitle as NSString).pathExtension.lowercased()
+                if PostRowView.imageExtensions.contains(ext), let url = post.fileURL {
                     AsyncImage(url: url) { phase in
                         if let image = phase.image { image.resizable().scaledToFill() }
                         else { Color.secondary.opacity(0.15) }
                     }
                     .frame(width: 56, height: 56)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
+                } else {
+                    FileThumbnailView(
+                        remoteURL: post.fileURL,
+                        localURL: cachedFileURL(),
+                        symbol: fileInfo.symbol,
+                        color: fileInfo.color,
+                        isDownloading: false
+                    )
                 }
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(post.displayTitle)
-                        .font(.body)
-                        .lineLimit(2)
-                        .foregroundStyle(.primary)
-                    Text(dateText)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
+            } else if post.format == "aside" {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8).fill(Color.blue.opacity(0.08))
+                    Image(systemName: "text.quote")
+                        .font(.system(size: 22))
+                        .foregroundStyle(.blue)
                 }
+                .frame(width: 56, height: 56)
+            } else if post.format == "link", let url = post.linkURL {
+                LinkThumbnailView(url: url)
+            } else if let urlString = post.featuredImageURL, let url = URL(string: urlString) {
+                AsyncImage(url: url) { phase in
+                    if let image = phase.image { image.resizable().scaledToFill() }
+                    else { Color.secondary.opacity(0.15) }
+                }
+                .frame(width: 56, height: 56)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
             }
-            .padding(.vertical, 2)
-        }
-        .buttonStyle(.plain)
-        .quickLookPreview($previewURL)
-        .alert("Preview failed", isPresented: Binding(
-            get: { downloadError != nil },
-            set: { if !$0 { downloadError = nil } }
-        )) {
-            Button("OK", role: .cancel) { downloadError = nil }
-        } message: {
-            Text(downloadError ?? "")
-        }
-    }
 
-    private func downloadAndPreview() async {
-        guard let remoteURL = post.fileURL else { return }
-        isDownloading = true
-        defer { isDownloading = false }
-        do {
-            let dest = cachedFileURL()
-            if !FileManager.default.fileExists(atPath: dest.path) {
-                let (tmpURL, _) = try await URLSession.shared.download(from: remoteURL)
-                try FileManager.default.moveItem(at: tmpURL, to: dest)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(post.displayTitle)
+                    .font(.body)
+                    .lineLimit(2)
+                    .foregroundStyle(.primary)
+                Text(dateText)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
             }
-            previewURL = dest
-        } catch {
-            downloadError = error.localizedDescription
         }
+        .padding(.vertical, 2)
     }
 }
 
@@ -468,6 +472,359 @@ struct FileThumbnailView: View {
         } catch {
             // Fall back to icon silently
         }
+    }
+}
+
+// MARK: - Link Thumbnail
+
+private let linkImageCache = NSCache<NSString, UIImage>()
+
+struct LinkThumbnailView: View {
+    let url: URL
+    @State private var image: UIImage?
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color.secondary.opacity(0.1))
+            if let image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            } else {
+                Image(systemName: "link")
+                    .font(.system(size: 20))
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .frame(width: 56, height: 56)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .task(id: url.absoluteString) {
+            let key = url.absoluteString as NSString
+            if let cached = linkImageCache.object(forKey: key) {
+                image = cached
+                return
+            }
+            let provider = LPMetadataProvider()
+            provider.shouldFetchSubresources = true
+            guard let meta = try? await provider.startFetchingMetadata(for: url) else { return }
+            let itemProvider = meta.imageProvider ?? meta.iconProvider
+            guard let itemProvider else { return }
+            await withCheckedContinuation { cont in
+                itemProvider.loadObject(ofClass: UIImage.self) { obj, _ in
+                    if let img = obj as? UIImage {
+                        linkImageCache.setObject(img, forKey: key)
+                        Task { @MainActor in image = img }
+                    }
+                    cont.resume()
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Post Detail View
+
+struct PostDetailView: View {
+    let post: WordPressPost
+    let token: String
+    let site: WordPressSite
+    let onDelete: () -> Void
+
+    @Environment(\.dismiss) private var dismiss
+    @State private var showDeleteConfirm = false
+    @State private var isDeleting = false
+    @State private var deleteError: String?
+    @State private var previewURL: URL?
+    @State private var isDownloading = false
+    @State private var videoPlayer: AVPlayer?
+
+    @State private var pdfFirstPage: UIImage?
+
+    private var postManager: WordPressPostManager { WordPressPostManager(token: token, site: site) }
+    private var isFile: Bool { post.tagSlugs.contains("folder-file") }
+
+    /// Title to show in the metadata row below content.
+    /// - Text/link posts: nil (date only, no duplicate)
+    /// - Photo posts: filename extracted from the featured image URL
+    /// - File posts: the stored display title (filename)
+    private var metadataTitle: String? {
+        switch post.format {
+        case "aside", "link": return nil
+        case "image":
+            if let urlString = post.featuredImageURL,
+               let url = URL(string: urlString) {
+                let name = url.lastPathComponent
+                return name.isEmpty ? nil : name
+            }
+            return nil
+        default: return post.displayTitle
+        }
+    }
+
+    private func cachedFileURL() -> URL {
+        FileManager.default.temporaryDirectory
+            .appendingPathComponent("folder_\(post.id)_\(post.displayTitle)")
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                contentPreview
+                    .frame(maxWidth: .infinity)
+
+                Divider()
+                    .padding(.top, (post.format == "image" || isImageFile || PostRowView.videoExtensions.contains(fileExt)) ? 0 : 20)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    if let label = metadataTitle {
+                        Text(label)
+                            .font(.headline)
+                    }
+                    Text(post.date.formatted(date: .long, time: .shortened))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                .padding(.horizontal)
+                .padding(.vertical, 16)
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                if isDeleting {
+                    ProgressView()
+                } else {
+                    Menu {
+                        Button {
+                            performCopy()
+                        } label: {
+                            Label("Copy", systemImage: "doc.on.doc")
+                        }
+                        Button(role: .destructive) {
+                            showDeleteConfirm = true
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                    }
+                }
+            }
+        }
+        .alert("Remove this item?", isPresented: $showDeleteConfirm) {
+            Button("Remove", role: .destructive) { Task { await performDelete() } }
+            Button("Cancel", role: .cancel) {}
+        }
+        .alert("Couldn't Remove", isPresented: Binding(get: { deleteError != nil }, set: { if !$0 { deleteError = nil } })) {
+            Button("OK") { deleteError = nil }
+        } message: {
+            Text(deleteError ?? "")
+        }
+        .quickLookPreview($previewURL)
+        .task {
+            if PostRowView.videoExtensions.contains(fileExt) {
+                await setupVideoPlayer()
+            } else if fileExt == "pdf" {
+                await loadPDFFirstPage()
+            }
+        }
+    }
+
+    private var fileExt: String {
+        (post.displayTitle as NSString).pathExtension.lowercased()
+    }
+    private var isImageFile: Bool {
+        isFile && PostRowView.imageExtensions.contains(fileExt)
+    }
+
+    @ViewBuilder
+    private var contentPreview: some View {
+        if post.format == "image", let urlString = post.featuredImageURL, let url = URL(string: urlString) {
+            AsyncImage(url: url) { phase in
+                switch phase {
+                case .success(let image): image.resizable().scaledToFit()
+                case .failure: Color.secondary.opacity(0.1).frame(height: 200)
+                default: Color.secondary.opacity(0.08).frame(height: 200).overlay { ProgressView() }
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.top, 16)
+        } else if post.format == "link", let url = post.linkURL {
+            Button { UIApplication.shared.open(url) } label: {
+                HStack(spacing: 14) {
+                    LinkThumbnailView(url: url)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(post.displayTitle)
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(3)
+                        Text(url.host ?? url.absoluteString)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
+                    Spacer()
+                    Image(systemName: "arrow.up.right")
+                        .foregroundStyle(.tertiary)
+                }
+                .padding()
+                .background(Color(.secondarySystemGroupedBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .padding()
+            }
+            .buttonStyle(.plain)
+        } else if isImageFile, let url = post.fileURL {
+            AsyncImage(url: url) { phase in
+                switch phase {
+                case .success(let image): image.resizable().scaledToFit()
+                case .failure: Color.secondary.opacity(0.1).frame(height: 200)
+                default: Color.secondary.opacity(0.08).frame(height: 200).overlay { ProgressView() }
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.top, 16)
+        } else if isFile && PostRowView.videoExtensions.contains(fileExt) {
+            Group {
+                if let player = videoPlayer {
+                    VideoPlayer(player: player)
+                        .frame(height: 280)
+                } else {
+                    Color.secondary.opacity(0.08)
+                        .frame(height: 280)
+                        .overlay { ProgressView() }
+                }
+            }
+            .padding(.top, 16)
+        } else if isFile && fileExt == "pdf" {
+            VStack(spacing: 0) {
+                if let page = pdfFirstPage {
+                    Image(uiImage: page)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: .infinity)
+                } else {
+                    Color.secondary.opacity(0.08)
+                        .frame(height: 300)
+                        .overlay { ProgressView() }
+                }
+                Button("Open File") { Task { await downloadAndPreview() } }
+                    .buttonStyle(.bordered)
+                    .padding(.top, 20)
+                    .padding(.bottom, 8)
+            }
+            .frame(maxWidth: .infinity)
+        } else if isFile {
+            let fileInfo = PostRowView.fileIcon(for: post.displayTitle)
+            VStack(spacing: 20) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 16).fill(Color.blue.opacity(0.1))
+                    Image(systemName: fileInfo.symbol)
+                        .font(.system(size: 52))
+                        .foregroundStyle(.blue)
+                }
+                .frame(width: 120, height: 120)
+                if isDownloading {
+                    ProgressView("Downloading…")
+                } else {
+                    Button("Preview File") { Task { await downloadAndPreview() } }
+                        .buttonStyle(.bordered)
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 32)
+        } else {
+            let raw = post.rawContent ?? ""
+            let text = raw
+                .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            Text(text.isEmpty ? post.displayTitle : text)
+                .font(.body)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+        }
+    }
+
+    private func performCopy() {
+        switch post.format {
+        case "aside":
+            let raw = post.rawContent ?? ""
+            let text = raw
+                .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            UIPasteboard.general.string = text.isEmpty ? post.displayTitle : text
+        case "link":
+            UIPasteboard.general.string = post.linkURL?.absoluteString
+        case "image":
+            guard let urlString = post.featuredImageURL, let url = URL(string: urlString) else { return }
+            Task {
+                if let (data, _) = try? await URLSession.shared.data(from: url),
+                   let image = UIImage(data: data) {
+                    UIPasteboard.general.image = image
+                }
+            }
+        default: // file
+            UIPasteboard.general.string = post.fileURL?.absoluteString ?? post.url
+        }
+    }
+
+    private func performDelete() async {
+        isDeleting = true
+        do {
+            try await postManager.deletePost(id: post.id)
+            onDelete()
+            dismiss()
+        } catch {
+            deleteError = error.localizedDescription
+            isDeleting = false
+        }
+    }
+
+    private func setupVideoPlayer() async {
+        // Play the VideoPress CDN MP4 directly — no API calls needed.
+        guard let url = post.fileURL,
+              url.host?.contains("videos.files.wordpress.com") == true else { return }
+        videoPlayer = AVPlayer(url: url)
+    }
+
+    private func loadPDFFirstPage() async {
+        guard let remoteURL = post.fileURL else { return }
+        let dest = cachedFileURL()
+        do {
+            if !FileManager.default.fileExists(atPath: dest.path) {
+                let (tmp, _) = try await URLSession.shared.download(from: remoteURL)
+                try FileManager.default.moveItem(at: tmp, to: dest)
+            }
+            guard let doc = PDFDocument(url: dest), let page = doc.page(at: 0) else { return }
+            let bounds = page.bounds(for: .mediaBox)
+            let scale: CGFloat = 2
+            let size = CGSize(width: bounds.width * scale, height: bounds.height * scale)
+            let renderer = UIGraphicsImageRenderer(size: size)
+            let img = renderer.image { ctx in
+                UIColor.white.setFill()
+                ctx.fill(CGRect(origin: .zero, size: size))
+                ctx.cgContext.translateBy(x: 0, y: size.height)
+                ctx.cgContext.scaleBy(x: scale, y: -scale)
+                page.draw(with: .mediaBox, to: ctx.cgContext)
+            }
+            pdfFirstPage = img
+        } catch {}
+    }
+
+    private func downloadAndPreview() async {
+        guard let remoteURL = post.fileURL else { return }
+        isDownloading = true
+        defer { isDownloading = false }
+        do {
+            let dest = cachedFileURL()
+            if !FileManager.default.fileExists(atPath: dest.path) {
+                let (tmpURL, _) = try await URLSession.shared.download(from: remoteURL)
+                try FileManager.default.moveItem(at: tmpURL, to: dest)
+            }
+            previewURL = dest
+        } catch {}
     }
 }
 
@@ -691,13 +1048,13 @@ struct AvatarButton: View {
                     if let image = phase.image {
                         image.resizable().scaledToFill()
                     } else {
-                        Image(systemName: "person.circle.fill")
+                        Image(systemName: "person")
                             .resizable()
                             .foregroundStyle(.secondary)
                     }
                 }
             } else {
-                Image(systemName: "person.circle.fill")
+                Image(systemName: "person")
                     .resizable()
                     .foregroundStyle(.secondary)
             }
@@ -747,9 +1104,19 @@ struct AccountSheet: View {
 
                 if let site = auth.selectedSite {
                     Section("Posting to") {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(site.name).font(.body)
-                            Text(site.url).font(.footnote).foregroundStyle(.secondary)
+                        HStack {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(site.name).font(.body)
+                                Text(site.url).font(.footnote).foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                            if let url = URL(string: site.url) {
+                                Link(destination: url) {
+                                    Image(systemName: "arrow.up.right")
+                                        .font(.system(size: 16, weight: .medium))
+                                        .foregroundStyle(.primary)
+                                }
+                            }
                         }
                         .padding(.vertical, 2)
                     }

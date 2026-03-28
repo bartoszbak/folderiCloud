@@ -1,0 +1,4 @@
+Target dependency graph (2 targets)
+Target 'Folder' in project 'Folder'
+➜ Explicit dependency on target 'FolderShare' in project 'Folder'
+Target 'FolderShare' in project 'Folder' (no dependencies)

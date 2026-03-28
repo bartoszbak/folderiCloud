@@ -34,6 +34,7 @@ class ShareViewController: UIViewController {
                             self?.cancelWithError(nil)
                         }
                     )
+                    .fontDesign(.rounded)
                 )
                 addChild(hostingController)
                 view.addSubview(hostingController.view)
@@ -94,7 +95,14 @@ class ShareViewController: UIViewController {
                     }
                 } else if provider.hasItemConformingToTypeIdentifier(UTType.plainText.identifier) {
                     if let text = await loadText(from: provider) {
-                        results.append(.text(text))
+                        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                        if let url = URL(string: trimmed), url.scheme == "https" || url.scheme == "http" {
+                            // Avoid duplicating a URL already captured via the url-type provider
+                            let alreadyHave = results.contains { if case .url(let u) = $0 { return u == trimmed }; return false }
+                            if !alreadyHave { results.append(.url(trimmed)) }
+                        } else {
+                            results.append(.text(text))
+                        }
                     }
                 } else if provider.hasItemConformingToTypeIdentifier(UTType.data.identifier) {
                     if let fileURL = await loadFile(from: provider) {

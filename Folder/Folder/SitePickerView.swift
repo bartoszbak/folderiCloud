@@ -29,23 +29,27 @@ struct SitePickerView: View {
                         Button {
                             auth.selectSite(site)
                         } label: {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(site.name)
-                                    .font(.headline)
-                                    .foregroundStyle(.primary)
-                                Text(site.url)
-                                    .font(.footnote)
-                                    .foregroundStyle(.secondary)
+                            HStack(spacing: 12) {
+                                SiteFavicon(urlString: site.iconURL)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(site.name)
+                                        .font(.body.weight(.semibold))
+                                        .foregroundStyle(Color(.label))
+                                    Text(site.url)
+                                        .font(.footnote)
+                                        .foregroundStyle(Color(.secondaryLabel))
+                                }
+                                .padding(.vertical, 4)
                             }
-                            .padding(.vertical, 4)
                         }
+                        .foregroundStyle(Color(.label))
                     }
                 }
             }
             .navigationTitle("Choose a Site")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Disconnect", role: .destructive) {
+                    Button("Cancel") {
                         auth.logout()
                     }
                 }
@@ -61,5 +65,38 @@ struct SitePickerView: View {
         } catch {
             loadError = error.localizedDescription
         }
+    }
+}
+
+// MARK: - Favicon
+
+private struct SiteFavicon: View {
+    let urlString: String?
+
+    var body: some View {
+        Group {
+            if let urlString, let url = URL(string: urlString) {
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image.resizable().scaledToFill()
+                    default:
+                        placeholderIcon
+                    }
+                }
+            } else {
+                placeholderIcon
+            }
+        }
+        .frame(width: 36, height: 36)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+    }
+
+    private var placeholderIcon: some View {
+        Image(systemName: "globe")
+            .font(.system(size: 18))
+            .foregroundStyle(.secondary)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(.secondarySystemBackground))
     }
 }

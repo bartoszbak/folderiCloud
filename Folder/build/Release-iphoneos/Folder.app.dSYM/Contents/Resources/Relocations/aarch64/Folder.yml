@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/bartbak/Repo/FolderApp/Folder/build/Release-iphoneos/Folder.app/Folder'
+relocations:     []
+...

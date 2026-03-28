@@ -1,0 +1,328 @@
+{
+  "source": "/Users/bartbak/Repo/FolderApp/Folder/Folder/MainGridView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Folder",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 103
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tap + to add your first post.",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 83
+        }
+      },
+      {
+        "comment": "",
+        "key": "Nothing here yet",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 81
+        }
+      },
+      {
+        "comment": "",
+        "key": "Couldn't Load",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 73
+        }
+      },
+      {
+        "comment": "",
+        "key": "Retry",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 77
+        }
+      },
+      {
+        "comment": "",
+        "key": "All",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 114
+        }
+      },
+      {
+        "comment": "",
+        "key": "Photos",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 117
+        }
+      },
+      {
+        "comment": "",
+        "key": "Text",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 120
+        }
+      },
+      {
+        "comment": "",
+        "key": "Links",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 123
+        }
+      },
+      {
+        "comment": "",
+        "key": "Files",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 126
+        }
+      },
+      {
+        "comment": "",
+        "key": "Photos",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 139
+        }
+      },
+      {
+        "comment": "",
+        "key": "Text",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 142
+        }
+      },
+      {
+        "comment": "",
+        "key": "Links",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 145
+        }
+      },
+      {
+        "comment": "",
+        "key": "Files",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 148
+        }
+      },
+      {
+        "comment": "",
+        "key": "Remove this item?",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 558
+        }
+      },
+      {
+        "comment": "",
+        "key": "Couldn't Remove",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 563
+        }
+      },
+      {
+        "comment": "",
+        "key": "Remove",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 559
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 564
+        }
+      },
+      {
+        "comment": "",
+        "key": "Downloading…",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 620
+        }
+      },
+      {
+        "comment": "",
+        "key": "Preview File",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 622
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add to Folder",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 675
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 691
+        }
+      },
+      {
+        "comment": "",
+        "key": "Text",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 750
+        }
+      },
+      {
+        "comment": "",
+        "key": "What's on your mind?",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 745
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 70,
+          "startingLine": 753
+        }
+      },
+      {
+        "comment": "",
+        "key": "Post",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 755
+        }
+      },
+      {
+        "comment": "",
+        "key": "Link",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 841
+        }
+      },
+      {
+        "comment": "",
+        "key": "Title (optional)",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 832
+        }
+      },
+      {
+        "comment": "",
+        "key": "Description (optional)",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 836
+        }
+      },
+      {
+        "comment": "",
+        "key": "https://example.com",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 790
+        }
+      },
+      {
+        "comment": "",
+        "key": "Fetching page info…",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 799
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add a title",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 833
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add a description",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 837
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 70,
+          "startingLine": 844
+        }
+      },
+      {
+        "comment": "",
+        "key": "Post",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 846
+        }
+      },
+      {
+        "comment": "",
+        "key": "Account",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 958
+        }
+      },
+      {
+        "comment": "",
+        "key": "Logged as",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 925
+        }
+      },
+      {
+        "comment": "",
+        "key": "Posting to",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 942
+        }
+      },
+      {
+        "comment": "",
+        "key": "Disconnect",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 952
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 962
+        }
+      }
+    ]
+  },
+  "version": 1
+}

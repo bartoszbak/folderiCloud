@@ -44,6 +44,18 @@ struct WordPressPostManager {
         try await createPost(title: Self.timestampTitle("Photo"), content: content, featuredMediaID: mediaID, format: "image")
     }
 
+    func deletePost(id: Int) async throws {
+        let url = URL(string: "https://public-api.wordpress.com/rest/v1.1/sites/\(site.id)/posts/\(id)/delete")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            let detail = String(data: data, encoding: .utf8) ?? "unknown"
+            throw PostError.postFailed(detail)
+        }
+    }
+
     func postFile(data: Data, filename: String, mimeType: String) async throws {
         let (_, mediaURL) = try await uploadMedia(data: data, mimeType: mimeType, filename: filename)
         let content = mediaURL ?? ""
@@ -109,7 +121,36 @@ struct WordPressPostManager {
 
         let mediaResponse = try Self.decoder.decode(MediaUploadResponse.self, from: responseData)
         guard let item = mediaResponse.media.first else { throw PostError.uploadFailed("No media returned") }
-        return (item.id, item.url)
+
+        // For VideoPress uploads, resolve the CDN URL using the videopress_guid.
+        // The GUID may not be in the upload response yet (async assignment), so fetch
+        // the media item directly. Retry once after a short delay if still missing.
+        var vpGuid = item.videoPressGuid
+        if vpGuid == nil && mimeType.hasPrefix("video/") {
+            vpGuid = await fetchVideoPressGUID(mediaID: item.id)
+            if vpGuid == nil {
+                try? await Task.sleep(nanoseconds: 3_000_000_000) // 3 s
+                vpGuid = await fetchVideoPressGUID(mediaID: item.id)
+            }
+        }
+
+        let resolvedURL: String?
+        if let guid = vpGuid {
+            resolvedURL = "https://videos.files.wordpress.com/\(guid)/\(filename)"
+        } else {
+            resolvedURL = item.url
+        }
+        return (item.id, resolvedURL)
+    }
+
+    /// Fetches the VideoPress GUID for a media item that may still be processing.
+    private func fetchVideoPressGUID(mediaID: Int) async -> String? {
+        let url = URL(string: "https://public-api.wordpress.com/rest/v1.1/sites/\(site.id)/media/\(mediaID)")!
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        guard let (data, response) = try? await URLSession.shared.data(for: request),
+              (response as? HTTPURLResponse)?.statusCode == 200 else { return nil }
+        return (try? Self.decoder.decode(MediaUploadResponse.MediaItem.self, from: data))?.videoPressGuid
     }
 
     private static let decoder: JSONDecoder = {
@@ -151,10 +192,31 @@ struct WordPressPost: Identifiable, Decodable {
 
     var fileURL: URL? {
         guard let raw = rawContent else { return nil }
+
+        // 1. Plain URL stored directly in content (our default for non-video files)
         let stripped = raw
             .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
             .trimmingCharacters(in: .whitespacesAndNewlines)
-        return URL(string: stripped)
+        if let url = URL(string: stripped), url.scheme != nil {
+            return url
+        }
+
+        // 2. WordPress converts video URLs into VideoPress blocks — find any src="https://..." in the HTML
+        if let regex = try? NSRegularExpression(pattern: #"\bsrc="(https?://[^"]+)""#, options: .caseInsensitive),
+           let match = regex.firstMatch(in: raw, range: NSRange(raw.startIndex..., in: raw)),
+           let range = Range(match.range(at: 1), in: raw) {
+            return URL(string: String(raw[range]))
+        }
+
+        return nil
+    }
+
+    var linkURL: URL? {
+        guard format == "link", let raw = rawContent else { return nil }
+        guard let regex = try? NSRegularExpression(pattern: #"href="([^"]+)""#),
+              let match = regex.firstMatch(in: raw, range: NSRange(raw.startIndex..., in: raw)),
+              let range = Range(match.range(at: 1), in: raw) else { return nil }
+        return URL(string: String(raw[range]))
     }
 
     private struct TagStub: Decodable {}
@@ -189,9 +251,11 @@ private struct MediaUploadResponse: Decodable {
     struct MediaItem: Decodable {
         let id: Int
         let url: String?
+        let videoPressGuid: String?
         enum CodingKeys: String, CodingKey {
             case id = "ID"
             case url = "URL"
+            case videoPressGuid = "videopress_guid"
         }
     }
 }
