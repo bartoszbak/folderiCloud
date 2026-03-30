@@ -7,6 +7,7 @@ import QuickLookThumbnailing
 import LinkPresentation
 import AVKit
 import PDFKit
+import SafariServices
 
 // MARK: - Post Status
 
@@ -55,6 +56,14 @@ struct MainGridView: View {
     @State private var postStatus: PostStatus?
     @State private var postingTask: Task<Void, Never>?
 
+    // Tile preview state
+    @State private var quickLookURL: URL?
+    @State private var isPreparingPreview = false
+    @State private var safariURL: URL?
+    @State private var textPreviewPost: WordPressPost?
+    @State private var videoPreviewPost: WordPressPost?
+    @State private var videoPreviewPlayer: AVPlayer?
+
     private var filteredPosts: [WordPressPost] {
         guard let filter = activeFilter else { return posts }
         return posts.filter { post in
@@ -97,12 +106,8 @@ struct MainGridView: View {
                     spacing: 16
                 ) {
                     ForEach(filteredPosts) { post in
-                        NavigationLink {
-                            if let token = auth.token, let site = auth.selectedSite {
-                                PostDetailView(post: post, token: token, site: site) {
-                                    posts.removeAll { $0.id == post.id }
-                                }
-                            }
+                        Button {
+                            handleTileTap(post)
                         } label: {
                             PostGridCard(post: post)
                         }
@@ -257,6 +262,65 @@ struct MainGridView: View {
             }
         }
         .animation(.spring(response: 0.4), value: postStatus)
+
+        // Preview loading spinner (shown while downloading for QuickLook)
+        .overlay {
+            if isPreparingPreview {
+                ZStack {
+                    Color.black.opacity(0.15).ignoresSafeArea()
+                    ProgressView()
+                        .padding(20)
+                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14))
+                }
+            }
+        }
+        .animation(.easeInOut(duration: 0.2), value: isPreparingPreview)
+
+        // QuickLook (photos, image files, other files)
+        .quickLookPreview($quickLookURL)
+
+        // Safari (links)
+        .sheet(isPresented: Binding(
+            get: { safariURL != nil },
+            set: { if !$0 { safariURL = nil } }
+        )) {
+            if let url = safariURL {
+                SafariSheet(url: url)
+                    .ignoresSafeArea()
+            }
+        }
+
+        // Text bottom sheet
+        .sheet(item: $textPreviewPost) { post in
+            TextTilePreviewSheet(post: post)
+        }
+
+        // Video full-screen cover
+        .fullScreenCover(item: $videoPreviewPost) { _ in
+            ZStack(alignment: .topTrailing) {
+                Color.black.ignoresSafeArea()
+                if let player = videoPreviewPlayer {
+                    VideoTilePreviewCover(player: player)
+                        .ignoresSafeArea()
+                } else {
+                    ProgressView().tint(.white)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                Button { videoPreviewPost = nil } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title)
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundStyle(.white)
+                        .padding()
+                }
+            }
+        }
+        .onChange(of: videoPreviewPost) { _, newPost in
+            if newPost == nil {
+                videoPreviewPlayer?.pause()
+                videoPreviewPlayer = nil
+            }
+        }
     }
 
     // MARK: - Photo handling
@@ -339,6 +403,71 @@ struct MainGridView: View {
         } catch {
             loadError = error.localizedDescription
         }
+    }
+
+    // MARK: - Tile preview
+
+    private func handleTileTap(_ post: WordPressPost) {
+        let isFile = post.tagSlugs.contains("folder-file")
+        let fileExt = (post.displayTitle as NSString).pathExtension.lowercased()
+
+        if post.format == "link", let url = post.linkURL {
+            safariURL = url
+        } else if post.format == "aside" {
+            textPreviewPost = post
+        } else if post.format == "image",
+                  let urlStr = post.featuredImageURL,
+                  let url = URL(string: urlStr) {
+            let filename = url.lastPathComponent.isEmpty ? "photo.jpg" : url.lastPathComponent
+            Task { await prepareQuickLook(url: url, filename: filename, postId: post.id) }
+        } else if isFile && PostRowView.videoExtensions.contains(fileExt) {
+            Task { await prepareVideoPreview(post: post) }
+        } else if isFile, let fileURL = post.fileURL {
+            Task { await prepareQuickLook(url: fileURL, filename: post.displayTitle, postId: post.id) }
+        }
+    }
+
+    private func prepareQuickLook(url: URL, filename: String, postId: Int) async {
+        isPreparingPreview = true
+        defer { isPreparingPreview = false }
+        let dest = FileManager.default.temporaryDirectory
+            .appendingPathComponent("folder_ql_\(postId)_\(filename)")
+        do {
+            if !FileManager.default.fileExists(atPath: dest.path) {
+                let (tmp, _) = try await URLSession.shared.download(from: url)
+                try FileManager.default.moveItem(at: tmp, to: dest)
+            }
+            quickLookURL = dest
+        } catch {}
+    }
+
+    private func prepareVideoPreview(post: WordPressPost) async {
+        guard let url = post.fileURL else { return }
+        videoPreviewPost = post  // show cover immediately (buffering state)
+
+        let guid: String?
+        if url.scheme == "videopress" {
+            guid = url.host
+        } else if url.host == "videos.files.wordpress.com" {
+            guid = url.pathComponents.dropFirst().first
+        } else {
+            guid = nil
+        }
+
+        let playbackURL: URL
+        if let guid, !guid.isEmpty, let pm = postManager,
+           let resolved = await pm.fetchVideoPressPlaybackURL(guid: guid) {
+            playbackURL = resolved
+        } else if url.scheme == "https" {
+            playbackURL = url
+        } else {
+            videoPreviewPost = nil
+            return
+        }
+
+        let player = AVPlayer(url: playbackURL)
+        videoPreviewPlayer = player
+        player.play()
     }
 
     private func loadMorePosts() async {
