@@ -521,6 +521,7 @@ struct FileThumbnailView: View {
 // MARK: - Link Thumbnail
 
 private let linkImageCache = NSCache<NSString, UIImage>()
+private let videoThumbnailCache = NSCache<NSString, UIImage>()
 
 struct LinkThumbnailView: View {
     let url: URL
@@ -592,6 +593,7 @@ struct PostGridCard: View {
                 }
             }
             .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color(.separator), lineWidth: 1))
     }
 }
 
@@ -601,17 +603,27 @@ private struct PhotoGridCard: View {
     let post: WordPressPost
 
     var body: some View {
-        Group {
+        GeometryReader { geo in
             if let urlStr = post.featuredImageURL, let url = URL(string: urlStr) {
                 AsyncImage(url: url) { phase in
-                    if let img = phase.image { img.resizable().scaledToFill() }
-                    else { Color(.systemGray5) }
+                    if let img = phase.image {
+                        img.resizable()
+                            .scaledToFill()
+                            .frame(width: geo.size.width, height: geo.size.height)
+                            .clipped()
+                    } else {
+                        Color(.systemGray5)
+                            .frame(width: geo.size.width, height: geo.size.height)
+                    }
                 }
             } else {
                 Color(.systemGray5)
+                    .frame(width: geo.size.width, height: geo.size.height)
             }
         }
-        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.black.opacity(0.08), lineWidth: 1))
+        .overlay(alignment: .bottomTrailing) {
+            GridTypeBadge(systemImage: "photo.fill").padding(8)
+        }
     }
 }
 
@@ -634,6 +646,9 @@ private struct TextGridCard: View {
                 .foregroundStyle(.primary)
                 .padding(16)
         }
+        .overlay(alignment: .bottomTrailing) {
+            GridTypeBadge(systemImage: "text.quote").padding(8)
+        }
     }
 }
 
@@ -641,6 +656,7 @@ private struct TextGridCard: View {
 
 private struct LinkGridCard: View {
     let post: WordPressPost
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         ZStack {
@@ -651,28 +667,27 @@ private struct LinkGridCard: View {
             }
 
             VStack {
-                HStack {
-                    Spacer()
-                    GridTypeBadge(systemImage: "link")
-                }
                 Spacer()
-                Text(post.displayTitle)
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(.primary)
-                    .lineLimit(2)
-                    .truncationMode(.tail)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 6)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                HStack(spacing: 8) {
+                    Image(systemName: "link")
+                        .font(.system(size: 12, weight: .medium))
+                    Text(post.displayTitle)
+                        .lineLimit(2)
+                        .truncationMode(.tail)
+                }
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 6)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(colorScheme == .dark ? Color.black : Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
             }
             .padding(8)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .clipped()
-        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.black.opacity(0.06), lineWidth: 1))
     }
 }
 
@@ -699,6 +714,11 @@ private struct FileGridCard: View {
         return PostRowView.imageExtensions.contains(ext)
     }
 
+    private var isVideo: Bool {
+        let ext = (post.displayTitle as NSString).pathExtension.lowercased()
+        return PostRowView.videoExtensions.contains(ext)
+    }
+
     var body: some View {
         ZStack {
             if isPhoto, let url = post.fileURL {
@@ -715,22 +735,29 @@ private struct FileGridCard: View {
                         }
                     }
                 }
+                .overlay(alignment: .bottomTrailing) {
+                    GridTypeBadge(systemImage: "photo.fill").padding(8)
+                }
+            } else if isVideo, let url = post.fileURL {
+                VideoThumbnailGridView(url: url)
+                    .overlay(alignment: .bottomTrailing) {
+                        GridTypeBadge(systemImage: "video.fill").padding(8)
+                    }
             } else {
                 Color(.systemGray6)
                 VStack(spacing: 0) {
-                    HStack {
+                    Spacer()
+                    HStack(alignment: .bottom, spacing: 8) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(fileTypeLabel)
+                                .font(.system(size: 15, weight: .medium))
+                            Text(post.displayTitle)
+                                .font(.system(size: 15, weight: .medium))
+                                .lineLimit(1)
+                        }
                         Spacer()
                         GridTypeBadge(systemImage: PostRowView.fileIcon(for: post.displayTitle).symbol)
                     }
-                    Spacer()
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(fileTypeLabel)
-                            .font(.system(size: 15, weight: .medium))
-                        Text(post.displayTitle)
-                            .font(.system(size: 15, weight: .medium))
-                            .lineLimit(1)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .foregroundStyle(.primary)
                 .padding(8)
@@ -744,15 +771,16 @@ private struct FileGridCard: View {
 
 private struct GridTypeBadge: View {
     let systemImage: String
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 22)
-                .fill(.white)
+                .fill(colorScheme == .dark ? Color.black : Color.white)
                 .frame(width: 44, height: 44)
             Image(systemName: systemImage)
                 .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(.primary)
+                .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
         }
     }
 }
@@ -796,7 +824,104 @@ private struct LinkCardBackground: View {
     }
 }
 
+// MARK: - Video Thumbnail Grid View
+
+private struct VideoThumbnailGridView: View {
+    let url: URL
+    @State private var thumbnail: UIImage?
+
+    var body: some View {
+        GeometryReader { geo in
+            Group {
+                if let thumbnail {
+                    Image(uiImage: thumbnail)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geo.size.width, height: geo.size.height)
+                        .clipped()
+                } else {
+                    Color(.systemGray5)
+                        .frame(width: geo.size.width, height: geo.size.height)
+                }
+            }
+        }
+        .task(id: url.absoluteString) {
+            let key = url.absoluteString as NSString
+            if let cached = videoThumbnailCache.object(forKey: key) {
+                thumbnail = cached; return
+            }
+            guard let img = await fetchThumbnail(for: url) else { return }
+            videoThumbnailCache.setObject(img, forKey: key)
+            thumbnail = img
+        }
+    }
+
+    private func fetchThumbnail(for url: URL) async -> UIImage? {
+        if url.scheme == "videopress", let guid = url.host {
+            return await fetchVideoPressThumb(guid: guid)
+        }
+        if url.host?.hasSuffix("videos.files.wordpress.com") == true,
+           let guid = url.pathComponents.dropFirst().first {
+            return await fetchVideoPressThumb(guid: guid)
+        }
+        return await frameFromURL(url)
+    }
+
+    private func fetchVideoPressThumb(guid: String) async -> UIImage? {
+        struct VP: Decodable {
+            let poster: String?
+            let mp4: MP4?
+            struct MP4: Decodable {
+                let original: String?
+                let hd: String?
+                let std: String?
+            }
+        }
+        let apiURL = URL(string: "https://public-api.wordpress.com/rest/v1.1/videos/\(guid)")!
+        guard let (data, response) = try? await URLSession.shared.data(from: apiURL),
+              (response as? HTTPURLResponse)?.statusCode == 200,
+              let vp = try? JSONDecoder().decode(VP.self, from: data) else { return nil }
+
+        // Poster image is a cheap JPEG — try first
+        if let posterStr = vp.poster,
+           let posterURL = URL(string: posterStr),
+           let (imgData, _) = try? await URLSession.shared.data(from: posterURL),
+           let img = UIImage(data: imgData) { return img }
+
+        // Fallback: extract a frame from the mp4 URL
+        for urlStr in [vp.mp4?.original, vp.mp4?.hd, vp.mp4?.std].compactMap({ $0 }) {
+            if let mp4URL = URL(string: urlStr), let img = await frameFromURL(mp4URL) {
+                return img
+            }
+        }
+        return nil
+    }
+
+    private func frameFromURL(_ url: URL) async -> UIImage? {
+        let asset = AVAsset(url: url)
+        let generator = AVAssetImageGenerator(asset: asset)
+        generator.appliesPreferredTrackTransform = true
+        generator.maximumSize = CGSize(width: 600, height: 600)
+        guard let (cgImage, _) = try? await generator.image(at: .zero) else { return nil }
+        return UIImage(cgImage: cgImage)
+    }
+}
+
 // MARK: - Post Detail View
+
+private struct FullScreenVideoPlayer: UIViewControllerRepresentable {
+    let player: AVPlayer
+    func makeUIViewController(context: Context) -> AVPlayerViewController {
+        let vc = AVPlayerViewController()
+        vc.player = player
+        vc.entersFullScreenWhenPlaybackBegins = true
+        vc.exitsFullScreenWhenPlaybackEnds = true
+        return vc
+    }
+    func updateUIViewController(_ vc: AVPlayerViewController, context: Context) {
+        vc.player = player
+    }
+}
 
 struct PostDetailView: View {
     let post: WordPressPost
@@ -841,6 +966,10 @@ struct PostDetailView: View {
             .appendingPathComponent("folder_\(post.id)_\(post.displayTitle)")
     }
 
+    private var isVideoFile: Bool {
+        isFile && PostRowView.videoExtensions.contains(fileExt)
+    }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
@@ -848,7 +977,7 @@ struct PostDetailView: View {
                     .frame(maxWidth: .infinity)
 
                 Divider()
-                    .padding(.top, (post.format == "image" || isImageFile || PostRowView.videoExtensions.contains(fileExt)) ? 0 : 20)
+                    .padding(.top, (post.format == "image" || isImageFile || isVideoFile) ? 0 : 20)
 
                 VStack(alignment: .leading, spacing: 4) {
                     if let label = metadataTitle {
@@ -972,7 +1101,7 @@ struct PostDetailView: View {
                         .foregroundStyle(.tertiary)
                 }
                 .padding()
-                .background(Color(.secondarySystemGroupedBackground))
+                .background(Color(.systemGray6))
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .padding()
             }
@@ -987,19 +1116,33 @@ struct PostDetailView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.top, 16)
-            .onTapGesture(count: 2) { fullscreenPhotoURL = url }
+            .onTapGesture { Task { await downloadAndPreviewPhoto(url: url) } }
         } else if isFile && PostRowView.videoExtensions.contains(fileExt) {
-            Group {
-                if let player = videoPlayer {
-                    VideoPlayer(player: player)
-                        .frame(height: 280)
-                } else {
-                    Color.secondary.opacity(0.08)
-                        .frame(height: 280)
-                        .overlay { ProgressView() }
+            GeometryReader { geo in
+                let videoWidth = geo.size.width - 32
+                let videoHeight = videoWidth * 9 / 16
+                let containerHeight = videoHeight + 280
+                ZStack {
+                    Color(.systemGray6)
+                        .frame(width: geo.size.width, height: containerHeight)
+                    Group {
+                        if let player = videoPlayer {
+                            FullScreenVideoPlayer(player: player)
+                                .frame(width: videoWidth, height: videoHeight)
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                        } else {
+                            Color.secondary.opacity(0.08)
+                                .frame(width: videoWidth, height: videoHeight)
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                .overlay { ProgressView() }
+                        }
+                    }
                 }
+                .frame(width: geo.size.width, height: containerHeight)
+                .position(x: geo.size.width / 2, y: containerHeight / 2)
             }
-            .padding(.top, 16)
+            .frame(height: (UIScreen.main.bounds.width - 32) * 9 / 16 + 280)
+            .padding(.top, 8)
         } else if isFile && fileExt == "pdf" {
             VStack(spacing: 0) {
                 if let page = pdfFirstPage {
@@ -1284,12 +1427,20 @@ struct LinkComposerSheet: View {
 
     private var postManager: WordPressPostManager { WordPressPostManager(token: token, site: site) }
 
+    private func normalizedURL(_ raw: String) -> String {
+        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return trimmed }
+        let lower = trimmed.lowercased()
+        if lower.hasPrefix("http://") || lower.hasPrefix("https://") { return trimmed }
+        return "https://\(trimmed)"
+    }
+
     var body: some View {
         NavigationStack {
             Form {
                 Section {
                     TextField("https://example.com", text: $url)
-                        .keyboardType(.URL)
+                        .keyboardType(.default)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .focused($focused)
@@ -1345,7 +1496,7 @@ struct LinkComposerSheet: View {
                 ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Post") {
-                        let u = url; let t = title; let d = linkDescription; let pm = postManager
+                        let u = normalizedURL(url); let t = title; let d = linkDescription; let pm = postManager
                         onPost("Link") { try await pm.postLink(url: u, title: t, description: d) }
                         dismiss()
                     }
@@ -1361,7 +1512,7 @@ struct LinkComposerSheet: View {
             // Clear fields and re-fetch whenever the URL changes
             title = ""
             linkDescription = ""
-            fetcher.schedule(urlString: newURL)
+            fetcher.schedule(urlString: normalizedURL(newURL))
         }
         .onChange(of: fetcher.fetchedTitle) { _, newTitle in
             title = newTitle ?? ""
