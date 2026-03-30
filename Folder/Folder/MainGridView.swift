@@ -323,16 +323,18 @@ struct MainGridView: View {
         // Edit sheets
         .sheet(item: $editTextPost) { post in
             if let token = auth.token, let site = auth.selectedSite {
-                TextComposerSheet(token: token, site: site, editPost: post) { label, action in
-                    startPosting(label: label, action: action)
-                }
+                TextComposerSheet(
+                    token: token, site: site, editPost: post,
+                    onEdit: { label, action in startEditing(label: label, action: action) }
+                ) { _, _ in }
             }
         }
         .sheet(item: $editLinkPost) { post in
             if let token = auth.token, let site = auth.selectedSite {
-                LinkComposerSheet(token: token, site: site, editPost: post) { label, action in
-                    startPosting(label: label, action: action)
-                }
+                LinkComposerSheet(
+                    token: token, site: site, editPost: post,
+                    onEdit: { label, action in startEditing(label: label, action: action) }
+                ) { _, _ in }
             }
         }
     }
@@ -393,6 +395,27 @@ struct MainGridView: View {
                 guard !Task.isCancelled else { return }
                 postStatus = PostStatus(kind: .success, message: "\(label) posted!")
                 await loadPosts()
+            } catch {
+                guard !Task.isCancelled else { return }
+                postStatus = PostStatus(kind: .failure, message: error.localizedDescription)
+            }
+            try? await Task.sleep(for: .seconds(3))
+            guard !Task.isCancelled else { return }
+            postStatus = nil
+        }
+    }
+
+    func startEditing(label: String, action: @escaping () async throws -> WordPressPost) {
+        postingTask?.cancel()
+        postStatus = PostStatus(kind: .posting, message: "Updating…")
+        postingTask = Task {
+            do {
+                let updated = try await action()
+                guard !Task.isCancelled else { return }
+                postStatus = PostStatus(kind: .success, message: "\(label) updated!")
+                if let i = posts.firstIndex(where: { $0.id == updated.id }) {
+                    posts[i] = updated
+                }
             } catch {
                 guard !Task.isCancelled else { return }
                 postStatus = PostStatus(kind: .failure, message: error.localizedDescription)
@@ -1577,16 +1600,20 @@ struct TextComposerSheet: View {
     let token: String
     let site: WordPressSite
     let editPost: WordPressPost?
+    let onEdit: ((String, @escaping () async throws -> WordPressPost) -> Void)?
     let onPost: (String, @escaping () async throws -> Void) -> Void
 
     @Environment(\.dismiss) private var dismiss
     @State private var text: String
     @FocusState private var focused: Bool
 
-    init(token: String, site: WordPressSite, editPost: WordPressPost? = nil, onPost: @escaping (String, @escaping () async throws -> Void) -> Void) {
+    init(token: String, site: WordPressSite, editPost: WordPressPost? = nil,
+         onEdit: ((String, @escaping () async throws -> WordPressPost) -> Void)? = nil,
+         onPost: @escaping (String, @escaping () async throws -> Void) -> Void) {
         self.token = token
         self.site = site
         self.editPost = editPost
+        self.onEdit = onEdit
         self.onPost = onPost
         let initial = editPost.map { p in
             (p.rawContent ?? p.displayTitle)
@@ -1614,7 +1641,9 @@ struct TextComposerSheet: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(editPost == nil ? "Post" : "Save") {
                         let t = text; let pm = postManager
-                        if let post = editPost {
+                        if let post = editPost, let onEdit {
+                            onEdit("Thoughts") { try await pm.updateMessage(id: post.id, text: t) }
+                        } else if let post = editPost {
                             onPost("Thoughts") { try await pm.updateMessage(id: post.id, text: t) }
                         } else {
                             onPost("Thoughts") { try await pm.postMessage(t) }
@@ -1637,6 +1666,7 @@ struct LinkComposerSheet: View {
     let token: String
     let site: WordPressSite
     let editPost: WordPressPost?
+    let onEdit: ((String, @escaping () async throws -> WordPressPost) -> Void)?
     let onPost: (String, @escaping () async throws -> Void) -> Void
 
     @Environment(\.dismiss) private var dismiss
@@ -1646,10 +1676,13 @@ struct LinkComposerSheet: View {
     @State private var fetcher: LinkMetadataFetcher
     @FocusState private var focused: Bool
 
-    init(token: String, site: WordPressSite, editPost: WordPressPost? = nil, onPost: @escaping (String, @escaping () async throws -> Void) -> Void) {
+    init(token: String, site: WordPressSite, editPost: WordPressPost? = nil,
+         onEdit: ((String, @escaping () async throws -> WordPressPost) -> Void)? = nil,
+         onPost: @escaping (String, @escaping () async throws -> Void) -> Void) {
         self.token = token
         self.site = site
         self.editPost = editPost
+        self.onEdit = onEdit
         self.onPost = onPost
         self._fetcher = State(initialValue: LinkMetadataFetcher())
         if let post = editPost {
@@ -1745,7 +1778,9 @@ struct LinkComposerSheet: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(editPost == nil ? "Post" : "Save") {
                         let u = normalizedURL(url); let t = title; let d = linkDescription; let pm = postManager
-                        if let post = editPost {
+                        if let post = editPost, let onEdit {
+                            onEdit("Link") { try await pm.updateLink(id: post.id, url: u, title: t, description: d) }
+                        } else if let post = editPost {
                             onPost("Link") { try await pm.updateLink(id: post.id, url: u, title: t, description: d) }
                         } else {
                             onPost("Link") { try await pm.postLink(url: u, title: t, description: d) }

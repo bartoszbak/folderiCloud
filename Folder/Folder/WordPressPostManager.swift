@@ -63,18 +63,18 @@ struct WordPressPostManager {
         }
     }
 
-    func updateMessage(id: Int, text: String) async throws {
+    func updateMessage(id: Int, text: String) async throws -> WordPressPost {
         let title = text.isEmpty
             ? Self.timestampTitle("Note")
             : String(text.prefix(60)).trimmingCharacters(in: .whitespacesAndNewlines)
-        try await updatePost(id: id, params: ["title": title, "content": text, "format": "aside"])
+        return try await updatePost(id: id, params: ["title": title, "content": text, "format": "aside"])
     }
 
-    func updateLink(id: Int, url: String, title: String, description: String = "") async throws {
+    func updateLink(id: Int, url: String, title: String, description: String = "") async throws -> WordPressPost {
         let resolvedTitle = title.isEmpty ? (URL(string: url)?.host ?? url) : title
         var content = "<a href=\"\(url)\">\(resolvedTitle)</a>"
         if !description.isEmpty { content += "\n\n<p>\(description)</p>" }
-        try await updatePost(id: id, params: ["title": resolvedTitle, "content": content, "format": "link"])
+        return try await updatePost(id: id, params: ["title": resolvedTitle, "content": content, "format": "link"])
     }
 
     func postFile(data: Data, filename: String, mimeType: String) async throws {
@@ -92,7 +92,7 @@ struct WordPressPostManager {
         return "\(prefix) – \(f.string(from: Date()))"
     }
 
-    private func updatePost(id: Int, params: [String: Any]) async throws {
+    private func updatePost(id: Int, params: [String: Any]) async throws -> WordPressPost {
         let url = URL(string: "https://public-api.wordpress.com/rest/v1.1/sites/\(site.id)/posts/\(id)")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -106,6 +106,7 @@ struct WordPressPostManager {
             let detail = String(data: data, encoding: .utf8) ?? "unknown"
             throw PostError.postFailed(detail)
         }
+        return try Self.decoder.decode(WordPressPost.self, from: data)
     }
 
     private func createPost(title: String, content: String, featuredMediaID: Int? = nil, format: String? = nil, tags: [String] = []) async throws {

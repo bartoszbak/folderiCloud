@@ -40,15 +40,12 @@ struct TextTilePreviewSheet: View {
                     Button {
                         dismiss()
                     } label: {
-                        ZStack {
-                            Circle()
-                                .fill(.ultraThinMaterial)
-                                .frame(width: 44, height: 44)
-                            Image(systemName: "xmark")
-                                .font(.system(size: 13, weight: .bold))
-                                .foregroundStyle(.secondary)
-                        }
+                        Image(systemName: "xmark")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(.secondary)
+                            .frame(width: 44, height: 44)
                     }
+                    .glassEffect(.regular.interactive(), in: Circle())
                     .buttonStyle(.plain)
                     Spacer()
                 }
