@@ -1644,7 +1644,7 @@ struct TextComposerSheet: View {
                         if let post = editPost, let onEdit {
                             onEdit("Thoughts") { try await pm.updateMessage(id: post.id, text: t) }
                         } else if let post = editPost {
-                            onPost("Thoughts") { try await pm.updateMessage(id: post.id, text: t) }
+                            onPost("Thoughts") { _ = try await pm.updateMessage(id: post.id, text: t) }
                         } else {
                             onPost("Thoughts") { try await pm.postMessage(t) }
                         }
@@ -1781,7 +1781,7 @@ struct LinkComposerSheet: View {
                         if let post = editPost, let onEdit {
                             onEdit("Link") { try await pm.updateLink(id: post.id, url: u, title: t, description: d) }
                         } else if let post = editPost {
-                            onPost("Link") { try await pm.updateLink(id: post.id, url: u, title: t, description: d) }
+                            onPost("Link") { _ = try await pm.updateLink(id: post.id, url: u, title: t, description: d) }
                         } else {
                             onPost("Link") { try await pm.postLink(url: u, title: t, description: d) }
                         }
