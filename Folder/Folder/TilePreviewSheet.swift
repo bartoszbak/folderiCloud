@@ -21,6 +21,7 @@ struct SafariSheet: UIViewControllerRepresentable {
 /// Appears at 1/3 screen height; drag the handle up to expand to full screen.
 struct TextTilePreviewSheet: View {
     let post: WordPressPost
+    @Environment(\.dismiss) private var dismiss
 
     private var text: String {
         (post.rawContent ?? post.displayTitle)
@@ -29,13 +30,41 @@ struct TextTilePreviewSheet: View {
     }
 
     var body: some View {
-        ScrollView {
-            Text(text.isEmpty ? post.displayTitle : text)
-                .font(.body)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 20)
-                .padding(.top, 12)
-                .padding(.bottom, 32)
+        VStack(spacing: 0) {
+            ZStack {
+                Text("Thoughts")
+                    .font(.system(size: 17, weight: .semibold))
+                    .frame(maxWidth: .infinity, alignment: .center)
+
+                HStack {
+                    Button {
+                        dismiss()
+                    } label: {
+                        ZStack {
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                                .frame(width: 44, height: 44)
+                            Image(systemName: "xmark")
+                                .font(.system(size: 13, weight: .bold))
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    Spacer()
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 12)
+            .padding(.bottom, 8)
+
+            ScrollView {
+                Text(text.isEmpty ? post.displayTitle : text)
+                    .font(.body)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 12)
+                    .padding(.bottom, 32)
+            }
         }
         .presentationDetents([.fraction(1 / 3), .large])
         .presentationDragIndicator(.visible)
@@ -47,18 +76,32 @@ struct TextTilePreviewSheet: View {
 /// Full-screen AVPlayerViewController cover that begins playback automatically.
 struct VideoTilePreviewCover: UIViewControllerRepresentable {
     let player: AVPlayer
+    var onDismiss: (() -> Void)?
+
+    final class Coordinator: NSObject, AVPlayerViewControllerDelegate {
+        var onDismiss: (() -> Void)?
+
+        func playerViewController(
+            _ playerViewController: AVPlayerViewController,
+            willEndFullScreenPresentationWithAnimationCoordinator coordinator: any UIViewControllerTransitionCoordinator
+        ) {
+            Task { @MainActor [weak self] in self?.onDismiss?() }
+        }
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
 
     func makeUIViewController(context: Context) -> AVPlayerViewController {
         let vc = AVPlayerViewController()
         vc.player = player
         vc.entersFullScreenWhenPlaybackBegins = true
         vc.exitsFullScreenWhenPlaybackEnds = false
+        vc.delegate = context.coordinator
         return vc
     }
 
     func updateUIViewController(_ vc: AVPlayerViewController, context: Context) {
-        if vc.player !== player {
-            vc.player = player
-        }
+        if vc.player !== player { vc.player = player }
+        context.coordinator.onDismiss = onDismiss
     }
 }

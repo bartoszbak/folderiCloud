@@ -64,6 +64,10 @@ struct MainGridView: View {
     @State private var videoPreviewPost: WordPressPost?
     @State private var videoPreviewPlayer: AVPlayer?
 
+    // Edit state
+    @State private var editTextPost: WordPressPost?
+    @State private var editLinkPost: WordPressPost?
+
     private var filteredPosts: [WordPressPost] {
         guard let filter = activeFilter else { return posts }
         return posts.filter { post in
@@ -112,6 +116,7 @@ struct MainGridView: View {
                             PostGridCard(post: post)
                         }
                         .buttonStyle(.plain)
+                        .contextMenu { tileContextMenu(for: post) }
                         .onAppear {
                             if hasMore && post.id == posts.last?.id {
                                 Task { await loadMorePosts() }
@@ -138,7 +143,7 @@ struct MainGridView: View {
     private var filterLabel: String? {
         switch activeFilter {
         case .photo:   return "Photos"
-        case .message: return "Text"
+        case .message: return "Thoughts"
         case .link:    return "Links"
         case .file:    return "Files"
         case nil:      return nil
@@ -175,7 +180,7 @@ struct MainGridView: View {
                             Label("Photos", systemImage: "photo")
                         }
                         Button { activeFilter = .message } label: {
-                            Label("Text", systemImage: "text.bubble")
+                            Label("Thoughts", systemImage: "text.bubble")
                         }
                         Button { activeFilter = .link } label: {
                             Label("Links", systemImage: "link")
@@ -197,7 +202,7 @@ struct MainGridView: View {
                             Label("Photos", systemImage: "photo")
                         }
                         Button { showTextComposer = true } label: {
-                            Label("Text", systemImage: "text.bubble")
+                            Label("Thoughts", systemImage: "text.bubble")
                         }
                         Button { showLinkComposer = true } label: {
                             Label("Links", systemImage: "link")
@@ -297,21 +302,14 @@ struct MainGridView: View {
 
         // Video full-screen cover
         .fullScreenCover(item: $videoPreviewPost) { _ in
-            ZStack(alignment: .topTrailing) {
+            ZStack {
                 Color.black.ignoresSafeArea()
                 if let player = videoPreviewPlayer {
-                    VideoTilePreviewCover(player: player)
+                    VideoTilePreviewCover(player: player, onDismiss: { videoPreviewPost = nil })
                         .ignoresSafeArea()
                 } else {
                     ProgressView().tint(.white)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                Button { videoPreviewPost = nil } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.title)
-                        .symbolRenderingMode(.hierarchical)
-                        .foregroundStyle(.white)
-                        .padding()
                 }
             }
         }
@@ -319,6 +317,22 @@ struct MainGridView: View {
             if newPost == nil {
                 videoPreviewPlayer?.pause()
                 videoPreviewPlayer = nil
+            }
+        }
+
+        // Edit sheets
+        .sheet(item: $editTextPost) { post in
+            if let token = auth.token, let site = auth.selectedSite {
+                TextComposerSheet(token: token, site: site, editPost: post) { label, action in
+                    startPosting(label: label, action: action)
+                }
+            }
+        }
+        .sheet(item: $editLinkPost) { post in
+            if let token = auth.token, let site = auth.selectedSite {
+                LinkComposerSheet(token: token, site: site, editPost: post) { label, action in
+                    startPosting(label: label, action: action)
+                }
             }
         }
     }
@@ -479,6 +493,41 @@ struct MainGridView: View {
             hasMore = fetched.count == pageSize
             posts.append(contentsOf: fetched)
         } catch {}
+    }
+
+    // MARK: - Context menu
+
+    @ViewBuilder
+    private func tileContextMenu(for post: WordPressPost) -> some View {
+        Button { handleTileTap(post) } label: {
+            Label("Open", systemImage: "arrow.up.right")
+        }
+        if post.format == "aside" {
+            Button { editTextPost = post } label: {
+                Label("Edit", systemImage: "pencil")
+            }
+        } else if post.format == "link" {
+            Button { editLinkPost = post } label: {
+                Label("Edit", systemImage: "pencil")
+            }
+        }
+        Button(role: .destructive) {
+            deletePostFromFeed(post)
+        } label: {
+            Label("Remove", systemImage: "trash")
+        }
+    }
+
+    private func deletePostFromFeed(_ post: WordPressPost) {
+        posts.removeAll { $0.id == post.id }
+        guard let pm = postManager else { return }
+        Task {
+            do {
+                try await pm.deletePost(id: post.id)
+            } catch {
+                await loadPosts()
+            }
+        }
     }
 }
 
@@ -1527,11 +1576,25 @@ struct TypeSelectionSheet: View {
 struct TextComposerSheet: View {
     let token: String
     let site: WordPressSite
+    let editPost: WordPressPost?
     let onPost: (String, @escaping () async throws -> Void) -> Void
 
     @Environment(\.dismiss) private var dismiss
-    @State private var text = ""
+    @State private var text: String
     @FocusState private var focused: Bool
+
+    init(token: String, site: WordPressSite, editPost: WordPressPost? = nil, onPost: @escaping (String, @escaping () async throws -> Void) -> Void) {
+        self.token = token
+        self.site = site
+        self.editPost = editPost
+        self.onPost = onPost
+        let initial = editPost.map { p in
+            (p.rawContent ?? p.displayTitle)
+                .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+        } ?? ""
+        self._text = State(initialValue: initial)
+    }
 
     private var postManager: WordPressPostManager { WordPressPostManager(token: token, site: site) }
 
@@ -1544,14 +1607,18 @@ struct TextComposerSheet: View {
                         .focused($focused)
                 }
             }
-            .navigationTitle("Text")
+            .navigationTitle(editPost == nil ? "Thoughts" : "Edit Thoughts")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Post") {
+                    Button(editPost == nil ? "Post" : "Save") {
                         let t = text; let pm = postManager
-                        onPost("Text") { try await pm.postMessage(t) }
+                        if let post = editPost {
+                            onPost("Thoughts") { try await pm.updateMessage(id: post.id, text: t) }
+                        } else {
+                            onPost("Thoughts") { try await pm.postMessage(t) }
+                        }
                         dismiss()
                     }
                 }
@@ -1569,14 +1636,42 @@ struct TextComposerSheet: View {
 struct LinkComposerSheet: View {
     let token: String
     let site: WordPressSite
+    let editPost: WordPressPost?
     let onPost: (String, @escaping () async throws -> Void) -> Void
 
     @Environment(\.dismiss) private var dismiss
-    @State private var url = ""
-    @State private var title = ""
-    @State private var linkDescription = ""
-    @State private var fetcher = LinkMetadataFetcher()
+    @State private var url: String
+    @State private var title: String
+    @State private var linkDescription: String
+    @State private var fetcher: LinkMetadataFetcher
     @FocusState private var focused: Bool
+
+    init(token: String, site: WordPressSite, editPost: WordPressPost? = nil, onPost: @escaping (String, @escaping () async throws -> Void) -> Void) {
+        self.token = token
+        self.site = site
+        self.editPost = editPost
+        self.onPost = onPost
+        self._fetcher = State(initialValue: LinkMetadataFetcher())
+        if let post = editPost {
+            self._url = State(initialValue: post.linkURL?.absoluteString ?? "")
+            self._title = State(initialValue: post.displayTitle)
+            let raw = post.rawContent ?? ""
+            let noLink: String
+            if let regex = try? NSRegularExpression(pattern: "<a[^>]*>.*?</a>", options: [.caseInsensitive, .dotMatchesLineSeparators]) {
+                noLink = regex.stringByReplacingMatches(in: raw, range: NSRange(raw.startIndex..., in: raw), withTemplate: "")
+            } else {
+                noLink = raw
+            }
+            let plain = noLink
+                .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            self._linkDescription = State(initialValue: plain)
+        } else {
+            self._url = State(initialValue: "")
+            self._title = State(initialValue: "")
+            self._linkDescription = State(initialValue: "")
+        }
+    }
 
     private var postManager: WordPressPostManager { WordPressPostManager(token: token, site: site) }
 
@@ -1643,14 +1738,18 @@ struct LinkComposerSheet: View {
                         .lineLimit(3...)
                 }
             }
-            .navigationTitle("Link")
+            .navigationTitle(editPost == nil ? "Link" : "Edit Link")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Post") {
+                    Button(editPost == nil ? "Post" : "Save") {
                         let u = normalizedURL(url); let t = title; let d = linkDescription; let pm = postManager
-                        onPost("Link") { try await pm.postLink(url: u, title: t, description: d) }
+                        if let post = editPost {
+                            onPost("Link") { try await pm.updateLink(id: post.id, url: u, title: t, description: d) }
+                        } else {
+                            onPost("Link") { try await pm.postLink(url: u, title: t, description: d) }
+                        }
                         dismiss()
                     }
                     .disabled(url.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -1662,7 +1761,6 @@ struct LinkComposerSheet: View {
             focused = true
         }
         .onChange(of: url) { _, newURL in
-            // Clear fields and re-fetch whenever the URL changes
             title = ""
             linkDescription = ""
             fetcher.schedule(urlString: normalizedURL(newURL))
