@@ -1,28 +1,24 @@
 # Folder
 
-An iOS app for quickly saving and organising content — photos, links, thoughts, and files — to a personal WordPress.com blog. Share anything from any app in seconds using the system Share Extension.
+An iOS app for quickly saving and organising content — photos, links, thoughts, and files — backed by iCloud. Save anything from any app in seconds using the system Share Extension. Your library syncs automatically across all your devices.
 
 ## Features
 
 - **2-column grid feed** with live filters by content type
 - **Four content types**
-  - **Photos** — pick from your library, uploads media and creates a post
-  - **Thoughts** — quick text notes saved as aside posts
+  - **Photos** — pick from your library, stored in iCloud
+  - **Thoughts** — quick text notes
   - **Links** — saves URLs with auto-fetched title, description, and favicon preview
-  - **Files** — uploads any file (PDF, video, audio, documents, archives)
-- **Tile previews on tap**
+  - **Files** — stores any file (PDF, video, audio, documents, archives)
+- **Tap to preview**
   - Photos and files open in QuickLook
   - Links open in an in-app SFSafariViewController
-  - Thoughts open in a bottom sheet with a Liquid Glass close button
-  - Videos play full-screen via AVPlayerViewController with native controls
-- **Long press context menu** on every tile
-  - Photos, videos, files: Open · Remove
-  - Thoughts, links: Open · Edit · Remove
-- **Edit in place** — thoughts and links open pre-filled composer sheets; changes reflect instantly without a full feed reload
+  - Thoughts open in a bottom sheet
+- **Long press context menu** — Open · Delete on every tile
 - **iOS Share Extension** — share URLs, images, and files from any app directly into Folder
-- **Pagination** — infinite scroll with 20-post pages
+- **iCloud sync** — library syncs across devices via iCloud Documents + CloudKit
+- **Sync state badges** — each tile shows its current sync state (Local · Syncing · Synced · Downloading · Cloud)
 - **Pull to refresh**
-- **Account sheet** showing logged-in user and active site
 
 ## Tech Stack
 
@@ -31,10 +27,9 @@ An iOS app for quickly saving and organising content — photos, links, thoughts
 | Language | Swift 5.0 |
 | UI | SwiftUI + `@Observable` |
 | Min iOS | iOS 26.2 |
-| Architecture | MVVM |
-| Backend | WordPress.com REST API v1.1 |
-| Auth | OAuth 2.0 via `ASWebAuthenticationSession` |
-| Storage | Keychain (token) · UserDefaults App Group (shared prefs) |
+| Architecture | MVVM + Clean Architecture (Use Cases, Repositories) |
+| Storage | iCloud Documents (files) · SwiftData + CloudKit (metadata) |
+| Auth | None — library is personal and iCloud-scoped |
 | Dependencies | None — framework-only |
 
 ## Project Structure
@@ -43,55 +38,60 @@ An iOS app for quickly saving and organising content — photos, links, thoughts
 Folder/
 ├── Folder/                          # Main app target
 │   ├── FolderApp.swift              # @main entry point
-│   ├── ContentView.swift            # Root: login → site picker → feed
-│   ├── MainGridView.swift           # Feed UI, composers, tile interactions
-│   ├── TilePreviewSheet.swift       # Thoughts sheet, video cover
-│   ├── SitePickerView.swift         # Site selection after login
-│   ├── WordPressAuthManager.swift   # OAuth flow, token exchange, user/site fetch
-│   ├── WordPressPostManager.swift   # All API calls (CRUD, media upload)
-│   ├── WordPressSite.swift          # Data models: Site, User, Post
-│   ├── LinkMetadataFetcher.swift    # Async link preview metadata fetcher
-│   └── KeychainHelper.swift        # Token storage + App Group sharing
+│   ├── ContentView.swift            # Root view — bootstraps the library
+│   ├── FolderBootstrapView.swift    # Loading / iCloud unavailable / ready states
+│   ├── FolderLibraryBootstrapModel.swift  # State machine for startup
+│   ├── FolderRuntimeConfiguration.swift   # Wires live iCloud or local dev fallback
+│   ├── FolderAppGroup.swift         # App group identifier constant
+│   ├── Domain/                      # Entities, repository protocols, use cases
+│   │   ├── Entities/                # FolderItem, Attachment, LinkInfo, FolderItemManifest
+│   │   └── UseCases/                # Create, Fetch, Update, Delete, Sync, Repair, Import
+│   ├── Data/                        # Concrete implementations
+│   │   ├── FileStore/               # FolderUbiquityFileStore — iCloud Documents via NSFileCoordinator
+│   │   ├── SwiftData/               # FolderLocalStore, SwiftDataFolderRepository, CloudKit sync
+│   │   └── Manifests/               # JSONFolderManifestStore — JSON manifests in iCloud
+│   ├── Presentation/                # SwiftUI views and view models
+│   │   ├── Feed/                    # FolderFeedView, FeedViewModel, FeedItemViewData
+│   │   ├── Compose/                 # Thought / Link / Photo / File composers
+│   │   ├── Maintenance/             # Debug repair tooling
+│   │   └── Preview/                 # SafariSheet
+│   └── ShareInbox/                  # FolderSharedInboxStore, FolderSharedInboxImporter
 ├── FolderShare/                     # Share Extension target
-│   ├── ShareViewController.swift   # Extracts NSExtensionItem attachments
-│   └── ShareComposeView.swift      # Composer UI inside the extension
-├── FolderTests/
-├── FolderUITests/
+│   ├── ShareViewController.swift    # Extracts NSExtensionItem attachments
+│   ├── ShareComposeView.swift       # Progress UI inside the extension
+│   └── ShareInboxWriter.swift       # Writes payloads to the App Group inbox
+├── FolderTests/                     # Unit tests
 └── Folder.xcodeproj/
-patch_project.py                     # Adds FolderShare target to a fresh project
 ```
+
+## How iCloud Sync Works
+
+The library uses two complementary storage layers:
+
+1. **iCloud Documents (ubiquity container)** — raw files (photos, attachments, manifests) stored under `iCloud.com.bartbak.fastapp.Folder/Documents/`. Each item gets a canonical path: `Kind/Year/Month/UUID/role/filename`. File access is coordinated via `NSFileCoordinator`.
+
+2. **SwiftData + CloudKit** — a local SQLite database (`FolderItemEntity`, `AttachmentEntity`, `LinkInfoEntity`) synced across devices via CloudKit private database. Acts as the fast query layer for the feed.
+
+3. **JSON Manifests** — each item writes a complete manifest (metadata + attachment paths) to the ubiquity container. Manifests are the source of truth used to rebuild the database after reinstall or corruption (`RebuildFolderDatabaseFromManifestsUseCase`).
+
+4. **Share Extension inbox** — the Share Extension writes payloads to the App Group container (`group.com.bartbak.fastapp.folder/Inbox/`). The main app imports pending requests on every foreground activation.
 
 ## Getting Started
 
 ### Prerequisites
 
 - Xcode 26.2+
-- A [WordPress.com](https://developer.wordpress.com/apps/) OAuth app (client ID + secret)
+- An Apple Developer account with iCloud (paid membership required)
+- iCloud container `iCloud.com.bartbak.fastapp.Folder` registered in the [Apple Developer portal](https://developer.apple.com/account/resources/identifiers/list)
 
 ### Setup
 
 1. Clone the repo and open `Folder/Folder.xcodeproj` in Xcode.
+2. In the Apple Developer portal, enable the **iCloud** capability on app ID `com.bartbak.fastapp.Folder` and attach the container `iCloud.com.bartbak.fastapp.Folder`.
+3. Regenerate and download provisioning profiles for both targets.
+4. Select the **Folder** scheme, choose an iOS 26.2+ simulator or device, and run.
 
-2. Create the secrets file (git-ignored):
-
-```swift
-// Folder/Folder/WordPressSecrets.swift
-enum WordPressSecrets {
-    static let clientID     = "<your-client-id>"
-    static let clientSecret = "<your-client-secret>"
-    static let redirectURI  = "com.bartbak.fastapp.folder://oauth"
-}
-```
-
-3. Select the **Folder** scheme, choose an iOS 26.2+ simulator or device, and run.
-
-### Share Extension
-
-If adding the extension target to a freshly cloned project:
-
-```bash
-python3 patch_project.py
-```
+> **Local development fallback:** In `DEBUG` builds, if iCloud is unavailable (e.g. simulator without a signed-in account), the app automatically falls back to a local on-device library with no CloudKit sync.
 
 ## Bundle Identifiers
 
@@ -100,27 +100,8 @@ python3 patch_project.py
 | Main app | `com.bartbak.fastapp.Folder` |
 | Share Extension | `com.bartbak.fastapp.Folder.FolderShare` |
 | App Group | `group.com.bartbak.fastapp.folder` |
+| iCloud Container | `iCloud.com.bartbak.fastapp.Folder` |
 | Team | `TJ3ALYQV5G` |
-
-## API Overview
-
-All WordPress.com calls live in `WordPressPostManager`. Base URL: `https://public-api.wordpress.com/rest/v1.1`.
-
-| Method | Endpoint | Purpose |
-|---|---|---|
-| GET | `/sites/{id}/posts` | Fetch paginated feed |
-| POST | `/sites/{id}/posts/new` | Create post |
-| POST | `/sites/{id}/posts/{id}` | Update post |
-| POST | `/sites/{id}/posts/{id}/delete` | Delete post |
-| POST | `/sites/{id}/media/new` | Upload media |
-
-## Common Tasks
-
-- **Add a post type** — add creation logic in `WordPressPostManager.swift`, add a compose button in `MainGridView.swift`
-- **Change API behavior** — all calls are in `WordPressPostManager.swift`
-- **Modify auth** — `WordPressAuthManager.swift`
-- **Update share extension UI** — `ShareComposeView.swift`
-- **Change data models** — `WordPressSite.swift` (`WordPressPost`, `WordPressSite`, `WordPressUser`)
 
 ## Running Tests
 
@@ -130,5 +111,3 @@ xcodebuild test \
   -scheme Folder \
   -destination 'platform=iOS Simulator,name=iPhone 16'
 ```
-
-Test coverage is currently minimal.
