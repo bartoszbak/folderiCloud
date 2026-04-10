@@ -1,0 +1,186 @@
+{
+  "" : {
+    "const-values" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.swiftconstvalues",
+    "dependencies" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.d",
+    "diagnostics" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.dia",
+    "emit-module-dependencies" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary-emit-module.dia",
+    "pch" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.swiftdeps"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/AppDelegate.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/AppDelegate.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/AppDelegate.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/AppDelegate.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/ContentView.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/ContentView.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Data/SwiftData/FolderLocalStore.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderLocalStore.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderLocalStore.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderLocalStore.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Data/SwiftData/Mappers/SwiftDataFolderMapper.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SwiftDataFolderMapper.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SwiftDataFolderMapper.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SwiftDataFolderMapper.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Data/SwiftData/Models/AttachmentEntity.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/AttachmentEntity.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/AttachmentEntity.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/AttachmentEntity.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Data/SwiftData/Models/FolderItemEntity.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemEntity.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemEntity.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemEntity.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Data/SwiftData/Models/LinkInfoEntity.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkInfoEntity.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkInfoEntity.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkInfoEntity.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Data/SwiftData/SwiftDataFolderRepository.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SwiftDataFolderRepository.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SwiftDataFolderRepository.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SwiftDataFolderRepository.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Data/SwiftData/SwiftDataFolderRepositoryError.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SwiftDataFolderRepositoryError.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SwiftDataFolderRepositoryError.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SwiftDataFolderRepositoryError.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/Entities/Attachment.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Attachment.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Attachment.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Attachment.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/Entities/FolderItem.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItem.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItem.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItem.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/Entities/FolderItemRecord.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemRecord.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemRecord.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemRecord.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/Entities/LinkInfo.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkInfo.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkInfo.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkInfo.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/Queries/FolderItemQuery.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemQuery.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemQuery.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemQuery.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/Repositories/AttachmentRepository.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/AttachmentRepository.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/AttachmentRepository.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/AttachmentRepository.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/Repositories/FolderItemRepository.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemRepository.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemRepository.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemRepository.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/Repositories/LinkInfoRepository.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkInfoRepository.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkInfoRepository.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkInfoRepository.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/Support/FolderDomainError.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderDomainError.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderDomainError.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderDomainError.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/Support/FolderItemDraft.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemDraft.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemDraft.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderItemDraft.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/UseCases/CreateFolderItemUseCase.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/CreateFolderItemUseCase.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/CreateFolderItemUseCase.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/CreateFolderItemUseCase.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/UseCases/DeleteFolderItemUseCase.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/DeleteFolderItemUseCase.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/DeleteFolderItemUseCase.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/DeleteFolderItemUseCase.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/UseCases/FetchFolderItemsUseCase.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FetchFolderItemsUseCase.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FetchFolderItemsUseCase.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FetchFolderItemsUseCase.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Domain/UseCases/UpdateFolderItemUseCase.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/UpdateFolderItemUseCase.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/UpdateFolderItemUseCase.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/UpdateFolderItemUseCase.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/FolderApp.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderApp.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderApp.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/FolderApp.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/KeychainHelper.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/KeychainHelper.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/KeychainHelper.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/KeychainHelper.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/LinkMetadataFetcher.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkMetadataFetcher.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkMetadataFetcher.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/LinkMetadataFetcher.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/MainGridView.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/MainGridView.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/MainGridView.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/MainGridView.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/MediaUploadSession.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/MediaUploadSession.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/MediaUploadSession.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/MediaUploadSession.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/SitePickerView.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SitePickerView.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SitePickerView.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/SitePickerView.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/TilePreviewSheet.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/TilePreviewSheet.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/TilePreviewSheet.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/TilePreviewSheet.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/WordPressAuthManager.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressAuthManager.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressAuthManager.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressAuthManager.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/WordPressPostManager.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressPostManager.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressPostManager.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressPostManager.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/WordPressSecrets.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressSecrets.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressSecrets.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressSecrets.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/WordPressSite.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressSite.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressSite.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/WordPressSite.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/GeneratedAssetSymbols.o"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "source": "/Users/bartbak/Repo/FolderApp/Folder/Folder/SitePickerView.swift",
+  "source": "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/SitePickerView.swift",
   "tables": {
     "Localizable": [
       {
@@ -7,7 +7,7 @@
         "key": "Choose a Site",
         "location": {
           "startingColumn": 30,
-          "startingLine": 45
+          "startingLine": 49
         }
       },
       {
@@ -52,10 +52,10 @@
       },
       {
         "comment": "",
-        "key": "Disconnect",
+        "key": "Cancel",
         "location": {
           "startingColumn": 28,
-          "startingLine": 48
+          "startingLine": 52
         }
       }
     ]

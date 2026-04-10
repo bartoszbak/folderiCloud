@@ -311,6 +311,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class NSString;
 SWIFT_CLASS("_TtC6Folder11AppDelegate")
 @interface AppDelegate : NSObject <UIApplicationDelegate>
+- (BOOL)application:(UIApplication * _Nonnull)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id> * _Nullable)launchOptions SWIFT_WARN_UNUSED_RESULT;
 /// Called by iOS when a background URLSession finishes its tasks while the app was suspended.
 /// Re-attaching to MediaUploadSession ensures its delegate receives the completion events,
 /// and the stored completion handler tells iOS we’re done processing them.

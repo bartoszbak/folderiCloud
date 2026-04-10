@@ -1,0 +1,26 @@
+{
+  "" : {
+    "const-values" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests-primary.swiftconstvalues",
+    "dependencies" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests-primary.d",
+    "diagnostics" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests-primary.dia",
+    "emit-module-dependencies" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests-primary-emit-module.dia",
+    "pch" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests-primary.swiftdeps"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/FolderTests/DomainCoreTests.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/DomainCoreTests.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/DomainCoreTests.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/DomainCoreTests.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/FolderTests/FolderTests.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests.o"
+  },
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/FolderTests/SwiftDataFolderRepositoryTests.swift" : {
+    "index-unit-output-path" : "/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/SwiftDataFolderRepositoryTests.o",
+    "llvm-bc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/SwiftDataFolderRepositoryTests.bc",
+    "object" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/SwiftDataFolderRepositoryTests.o"
+  }
+}

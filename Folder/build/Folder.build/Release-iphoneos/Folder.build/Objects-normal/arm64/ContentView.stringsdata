@@ -1,37 +1,61 @@
 {
-  "source": "/Users/bartbak/Repo/FolderApp/Folder/Folder/ContentView.swift",
+  "source": "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/ContentView.swift",
   "tables": {
     "Localizable": [
       {
         "comment": "",
         "key": "Folder",
         "location": {
-          "startingColumn": 18,
-          "startingLine": 32
+          "startingColumn": 22,
+          "startingLine": 48
         }
       },
       {
         "comment": "",
-        "key": "Connect your WordPress.com account to share content directly from any app.",
+        "key": "Everything you want to keep,\nready when you need it.",
         "location": {
-          "startingColumn": 18,
-          "startingLine": 34
+          "startingColumn": 22,
+          "startingLine": 52
         }
       },
       {
         "comment": "",
         "key": "Connecting…",
         "location": {
-          "startingColumn": 35,
-          "startingLine": 50
+          "startingColumn": 40,
+          "startingLine": 67
         }
       },
       {
         "comment": "",
-        "key": "Connect with WordPress.com",
+        "key": "Connect WordPress.com account",
         "location": {
-          "startingColumn": 53,
-          "startingLine": 50
+          "startingColumn": 58,
+          "startingLine": 67
+        }
+      },
+      {
+        "comment": "",
+        "key": "How Folder works",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 122
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save anything to your WordPress.com blog in seconds.",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 124
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 159
         }
       }
     ]

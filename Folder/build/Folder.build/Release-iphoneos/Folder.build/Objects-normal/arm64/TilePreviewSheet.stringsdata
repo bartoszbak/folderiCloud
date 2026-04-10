@@ -1,0 +1,16 @@
+{
+  "source": "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/TilePreviewSheet.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Thoughts",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 35
+        }
+      }
+    ]
+  },
+  "version": 1
+}

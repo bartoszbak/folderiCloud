@@ -10,6 +10,11 @@
     "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphoneos\/prebuilt-modules\/26.2\/AVFoundation.swiftmodule\/arm64e-apple-ios.swiftmodule"
   },
   {
+    "isFramework" : true,
+    "moduleName" : "AVKit",
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphoneos\/prebuilt-modules\/26.2\/AVKit.swiftmodule\/arm64e-apple-ios.swiftmodule"
+  },
+  {
     "isFramework" : false,
     "moduleName" : "Accelerate",
     "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphoneos\/prebuilt-modules\/26.2\/Accelerate.swiftmodule\/arm64e-apple-ios.swiftmodule"
@@ -205,6 +210,11 @@
     "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphoneos\/prebuilt-modules\/26.2\/QuickLookThumbnailing.swiftmodule\/arm64e-apple-ios.swiftmodule"
   },
   {
+    "isFramework" : true,
+    "moduleName" : "SafariServices",
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphoneos\/prebuilt-modules\/26.2\/SafariServices.swiftmodule\/arm64e-apple-ios.swiftmodule"
+  },
+  {
     "isFramework" : false,
     "moduleName" : "Spatial",
     "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphoneos\/prebuilt-modules\/26.2\/Spatial.swiftmodule\/arm64e-apple-ios.swiftmodule"
@@ -213,6 +223,11 @@
     "isFramework" : false,
     "moduleName" : "Swift",
     "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphoneos\/prebuilt-modules\/26.2\/Swift.swiftmodule\/arm64e-apple-ios.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "SwiftData",
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphoneos\/prebuilt-modules\/26.2\/SwiftData.swiftmodule\/arm64e-apple-ios.swiftmodule"
   },
   {
     "isFramework" : true,
@@ -241,6 +256,11 @@
   },
   {
     "isFramework" : true,
+    "moduleName" : "TipKit",
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphoneos\/prebuilt-modules\/26.2\/TipKit.swiftmodule\/arm64e-apple-ios.swiftmodule"
+  },
+  {
+    "isFramework" : true,
     "moduleName" : "UIKit",
     "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphoneos\/prebuilt-modules\/26.2\/UIKit.swiftmodule\/arm64e-apple-ios.swiftmodule"
   },
@@ -253,6 +273,11 @@
     "isFramework" : false,
     "moduleName" : "XPC",
     "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphoneos\/prebuilt-modules\/26.2\/XPC.swiftmodule\/arm64e-apple-ios.swiftmodule"
+  },
+  {
+    "isFramework" : true,
+    "moduleName" : "_AVKit_SwiftUI",
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/iphoneos\/prebuilt-modules\/26.2\/_AVKit_SwiftUI.swiftmodule\/arm64e-apple-ios.swiftmodule"
   },
   {
     "isFramework" : true,
@@ -311,560 +336,574 @@
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/AVFAudio.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/AVFAudio-D1QCQKRAZ1ADZSL8W7EERPVY8.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/AVFAudio-27T2EC8NRE8SQWSIR3QGSP5ZU.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "AVFAudio"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/AVFoundation.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/AVFoundation-8ZI4TE7VRW5P3KCY5OK7TAPTA.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/AVFoundation-9QUI8ZQG2YZ14LRXH3P0JOWRZ.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "AVFoundation"
   },
   {
+    "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/AVKit.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/AVKit-EQG4NDK2VR32KIND1OJY52EO9.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "AVKit"
+  },
+  {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/AVRouting.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/AVRouting-898SPQVXM3420CPR6RXMQ8LEX.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/AVRouting-6L20RVYN7E8CC9B96OB5VVTKL.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "AVRouting"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/Accelerate.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/Accelerate-EXWWY5AZVO30O3IG3OQ5E8D6B.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/Accelerate-9OGB8Q3OA3VRSIU79ICD1TCH.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Accelerate"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/Accessibility.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/Accessibility-14G81BNNMXFB69NFD6BXA1P73.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/Accessibility-1OU1Y7HZVCGRY6A1P70I17O1E.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Accessibility"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/AudioToolbox.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/AudioToolbox-D1P4PHIYCBJL5K39MCQOFTAVA.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/AudioToolbox-A2AZKJ4GUXNW5KQP7N47V9W4H.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "AudioToolbox"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Cryptexes\/OS\/System\/Library\/Frameworks\/AuthenticationServices.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/AuthenticationServices-78OQEKW2F4CCEUOMZMH4NQRR.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/AuthenticationServices-7A959NEESQQRUHH01VP8GVMAC.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "AuthenticationServices"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CFNetwork.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CFNetwork-9JFG2RRJBB6QC634JVP51KS5B.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CFNetwork-9T1YKDJYAFLBHJD07GED4UPC3.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CFNetwork"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CoreAudio.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreAudio-7SM31ZRH7NL3R882EQZU6Z8ZV.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreAudio-DGLAXFA8PODN6WXN2EPXT3C43.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreAudio"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CoreAudioTypes.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreAudioTypes-5WOJEMGL6Q890VOKUXKEJD5JX.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreAudioTypes-89BMBV3AXMIX5D1DF0AFEKF11.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreAudioTypes"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CoreData.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreData-5LPTDY6VO36LR9ZLF3TDVH83C.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreData-279OIXU3O6OJTWG38JC9YKBBJ.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreData"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CoreFoundation.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreFoundation-QIXKEBC4WII2350XTGIQUJVB.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreFoundation-B1TRR3SUIAJB74XH7WW7JULHE.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreFoundation"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CoreGraphics.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreGraphics-2O9XNOBIGQ1JVEE8RTDW16591.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreGraphics-304SWK73LUIIMB4OZUC7AXW3I.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreGraphics"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CoreImage.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreImage-CQSTIKD8YJ30TMCF390H43GDP.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreImage-8BD3TWEIK40SBA9LEHTGWRS33.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreImage"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CoreLocation.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreLocation-ITGPLFU9FGHCGQZFI4LG0X1L.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreLocation-46UW8R8X4BB0VMCY62ZFGCAPZ.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreLocation"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CoreMIDI.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreMIDI-38OA0GCECS018AR2XXYVR0SB0.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreMIDI-CM55K9E2Z3XYCBXTDAG3O8TK4.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreMIDI"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CoreMedia.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreMedia-9LFR8M8PPDP0RAE9T10SYH354.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreMedia-D1D9SIPZLJMRF27QUUK96PJYN.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreMedia"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CoreText.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreText-4S0X7GSCMB6402K67OSSNZRNX.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreText-33UL81M4Q1O0WGBFEMRKLXQOH.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreText"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CoreTransferable.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreTransferable-C48JA51LOFOP7LKYLFVEKF8XH.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreTransferable-DJFLIX1ZNZ32UHIC6W4Y60SJU.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreTransferable"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/CoreVideo.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreVideo-ER8LJLSQ4R6PZD28XZ4RABKUM.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/CoreVideo-1UTC8LMQBFRL0515RNDB9VUP3.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreVideo"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/Darwin.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/Darwin-C2C4WVWJVMSNFJ1PR9J44CCQC.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/Darwin-16E1MUMGXPFPAU4LYC2YZTRG0.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Darwin"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/DataDetection.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/DataDetection-952985IM13SBRMU19AOMR3P8M.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/DataDetection-2EKAB9PNGGDZ2SG69444KR7E2.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "DataDetection"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/DeveloperToolsSupport.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/DeveloperToolsSupport-1FC95J3O9N9TO7QYM92KICWQ2.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/DeveloperToolsSupport-1FC95J3O9N9TO7QYM92KICWQ2.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "DeveloperToolsSupport"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/dispatch.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/Dispatch-BD43GBJHR7TCXO6QA3RGBPWAZ.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/Dispatch-BZSEXGSOFQ9AZVRC4AQXAJ3GP.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Dispatch"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/ExtensionFoundation.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/ExtensionFoundation-40O04XJRFXX9AM1AJO1GQFAMH.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/ExtensionFoundation-EHJJVJ5HYMQOG4XMX042Q4620.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ExtensionFoundation"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/ExtensionKit.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/ExtensionKit-DKFT2DRJWJZV0PUAMQ1903HCS.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/ExtensionKit-B5CH8AOJMPMO1V94SFGH9W7MN.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ExtensionKit"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/FileProvider.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/FileProvider-8G2FCTXUXDAJLISWN7VSL3803.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/FileProvider-2HH4BQ9BMAUD0YDF12Q1M0CYV.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "FileProvider"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/Foundation.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/Foundation-5Z9BZL4IK8GET3NSKNTR164AI.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/Foundation-2CTX1EUA6YKT6KM00P8TRS2LX.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Foundation"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/IOSurface.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/IOSurface-4XVGO8EHLNG1H3YGPSHWIXYFE.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/IOSurface-6DYPBNJ0ZCFEEAJI4171KO61H.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "IOSurface"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/ImageIO.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/ImageIO-A1L7NPIGLG34RVXUE11ULFJR5.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/ImageIO-7ER70JRHHPACDGRQ51JL3V64T.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ImageIO"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/LinkPresentation.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/LinkPresentation-BYBTR0MZ9NJ588NKO0PBAMPC4.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/LinkPresentation-CAN765LA79CINXIK67OLTNIPY.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "LinkPresentation"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/LocalAuthentication.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/LocalAuthentication-ESX7582SC08K4LJE2JGTT3V3N.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/LocalAuthentication-7LQRIQEQOT5217MDHTDSD03NR.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "LocalAuthentication"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/DarwinBasic.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/MachO-51BNYD013LBWCLHZQ6CRYEZVT.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/MachO-DOZ47QOJTG1RMU9TIY4SWBPGE.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "MachO"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/MediaToolbox.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/MediaToolbox-DGM56LWQ2BMGVGMNJN6VEN4IA.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/MediaToolbox-AJM48CD120DVWFW3GL1GQM9PH.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "MediaToolbox"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/Metal.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/Metal-7UNNFM3PEINK9O08YSFDY9QQ2.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/Metal-60KDBQZGWJ7F1ZEYW8WBDVF3X.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Metal"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/Network.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/Network-8UENAB00X494IWUQ4MIT451Z9.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/Network-63T2J7PEWCRCPGY0KLRCLD7P1.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Network"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/OSLog.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/OSLog-9TP1TX23HEKH1AUHOR9N4YY25.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/OSLog-7F1THEMFXHUETD9AP4LTLIS6C.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "OSLog"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/ObjectiveC.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/ObjectiveC-5CVPUEC4JFXGBA38AT3VNGYAR.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/ObjectiveC-AGF13S0PM211ESF1GNGEXMU6Z.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ObjectiveC"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/OpenGLES.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/OpenGLES-AI5Y50YA1SZM7GNFYZWHVCZ7H.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/OpenGLES-7MBBCRCQ66BYI9US8AP5K328O.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "OpenGLES"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/PDFKit.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/PDFKit-3RH56OB8JFHNDX78MV2LJLUPF.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/PDFKit-MI7DO3AYR44B83VYBJ6GJQ3T.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "PDFKit"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/Photos.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/Photos-64ELS6H5IW79CC692MH5BKVA3.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/Photos-4OEHGFPXP78X0CGELSXZS49PJ.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Photos"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/PhotosUI.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/PhotosUI-DRQW07KIDMYBBEH016D9JUDJJ.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/PhotosUI-CHWK54P6QE5HIEJ7J7N224FV6.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "PhotosUI"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/QuartzCore.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/QuartzCore-A7FYE92UYLN0AKDX3E3VRB5XB.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/QuartzCore-EGQF3VMZNNEPMOJAJFJ2GDDUH.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "QuartzCore"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/QuickLook.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/QuickLook-8SK7G9OI1TRQI8ZKWM7ZIRH4M.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/QuickLook-EL4VQTW37YJQT0UOPK6NF0VL4.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "QuickLook"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/QuickLookThumbnailing.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/QuickLookThumbnailing-D63U06BNTOVWQYX6FHP3VX6O5.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/QuickLookThumbnailing-3A8EBZYNUWTTHA66V9BHCIVVQ.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "QuickLookThumbnailing"
   },
   {
+    "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Cryptexes\/OS\/System\/Library\/Frameworks\/SafariServices.framework\/Modules\/module.modulemap",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/SafariServices-5VIUPHY0LV3N9LK4O33BCJGVW.pcm",
+    "isBridgingHeaderDependency" : false,
+    "isFramework" : false,
+    "moduleName" : "SafariServices"
+  },
+  {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/Security.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/Security-6KL9OAZUX6NQ6VOX53XHHUJLI.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/Security-8E5QZLQ0CADUC5IAG0MZHUHWM.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Security"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/Spatial\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/Spatial-4Y7ATLGW5ZH52WCY0D6GFHF1K.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/Spatial-ED9LB1LCRYOW3VDSQ2QVJIOVS.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Spatial"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/lib\/swift\/shims\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/SwiftShims-DHC1PJR7ZRI1CBMW44ST4MUV9.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/SwiftShims-DHC1PJR7ZRI1CBMW44ST4MUV9.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "SwiftShims"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/SwiftUI.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/SwiftUI-E20YCCB86PKHCUX72G6VH5SNT.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/SwiftUI-4B7RI2V6JZLRMJSD6CQ8FAJ3L.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "SwiftUI"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/SwiftUICore.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/SwiftUICore-4P14HL0E64OQKJQK6ZTU6KVSG.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/SwiftUICore-8AGE8W97U8BJJIOHMVRKWRGMV.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "SwiftUICore"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/Symbols.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/Symbols-8V6L9F25MS84MEPQ1KNKLY5AI.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/Symbols-9U2FG5VQW3UJLD1G1F2BQW2OQ.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Symbols"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/UIKit.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/UIKit-EQURXFYRZG1XBKJUX6HD6X165.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/UIKit-DEUPJVAYBRDHWKR689HXR4GCR.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "UIKit"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/SubFrameworks\/UIUtilities.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/UIUtilities-7G2O3SKPPEU8Z3HJKFTLSDJP.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/UIUtilities-F8XBC3LAPVZMJS04NCH4PAPV.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "UIUtilities"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/UniformTypeIdentifiers.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/UniformTypeIdentifiers-1HY67XIIWJH76ECHQQH9YC17L.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/UniformTypeIdentifiers-5GKI34X90K3YFGWULI6A3PIO.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "UniformTypeIdentifiers"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/UserNotifications.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/UserNotifications-3CXP4194K2EJU1RXB3LGRPGZF.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/UserNotifications-4Y44YSGX7YIWCKHF93UE0YUAR.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "UserNotifications"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/xpc.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/XPC-EFU7DBAJAEFY0D2FWDDD4RGJR.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/XPC-6A9Q56IF8SDM5KB9P876A674S.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "XPC"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/DarwinFoundation1.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_AvailabilityInternal-1TZUCIC9YKLL4M1C6ROW864AB.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_AvailabilityInternal-1TZUCIC9YKLL4M1C6ROW864AB.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_AvailabilityInternal"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/17\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_float-3U5Y64FSZS2SU22IHJ0MNWCOS.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_float-3U5Y64FSZS2SU22IHJ0MNWCOS.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_float"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/17\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_intrinsics-EOSVB9AAVI4M6YDRXGL8GCJEF.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_intrinsics-3GDY9MT52RNEY10F8EDWAKQEP.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_intrinsics"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/17\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_inttypes-8XNXUKKKML4AOIG5SJV4H89F9.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_inttypes-UK8VH592J9NXOO3U33ZNVIAO.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_inttypes"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/17\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_limits-9C80XBOXHAE6L52RU9FTZI235.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_limits-CODE5793KQ39R25VKEMO44ZV0.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_limits"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/17\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_stdarg-CXPTJ8A5DG49V9TZMTH53LZCE.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_stdarg-CXPTJ8A5DG49V9TZMTH53LZCE.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_stdarg"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/17\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_stdatomic-1UO5F84TFPZXMKDRJPNNTRLAV.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_stdatomic-D887GVAYJ5H2SCGUNZE1W2X7S.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_stdatomic"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/17\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_stdbool-6T29E6QQS7KIIZW3YKUZEQTEO.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_stdbool-6T29E6QQS7KIIZW3YKUZEQTEO.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_stdbool"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/17\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_stddef-5F2M6CFPCW8HP6P1PWHTT2LIL.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_stddef-5F2M6CFPCW8HP6P1PWHTT2LIL.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_stddef"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/17\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_stdint-CTWU3V2Z60V0SNAHJGKTCNQSO.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_stdint-ANJX0DT26ALGJKDUTJNBR438L.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_stdint"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/17\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_tgmath-5WL0RH35UMYGH25ZI9UT5IIXQ.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_Builtin_tgmath-4AOSHE1DMAKRD923HVQ94F8SQ.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_tgmath"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/DarwinFoundation1.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_DarwinFoundation1-B0UIRX63KDQIARXFXYC20JACB.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_DarwinFoundation1-1LHA7O49FSLKQ9SHCJI7MQUQ4.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_DarwinFoundation1"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/DarwinFoundation2.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_DarwinFoundation2-1RKPCS42CBHCF05RKLM88IYIR.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_DarwinFoundation2-A0G8FQUNBEWHA3K4AKEPUCZRL.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_DarwinFoundation2"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/DarwinFoundation3.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_DarwinFoundation3-AIHLOY1E2MS891DH3RGA0OWF4.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_DarwinFoundation3-9NRLLVRWS4MGI82YR8JXEXMEF.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_DarwinFoundation3"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/System\/Library\/Frameworks\/_LocationEssentials.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_LocationEssentials-P2O01U9LKGFNZEEUSGIVDCZU.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_LocationEssentials-AGRDYV2TS7ANAT115U1I8FADC.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_LocationEssentials"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/lib\/swift\/shims\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/_SwiftConcurrencyShims-C96QNC1MSWOS0LIYJA43EU3IV.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/_SwiftConcurrencyShims-C96QNC1MSWOS0LIYJA43EU3IV.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_SwiftConcurrencyShims"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/dnssd.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/dnssd-AMJ1ABA4LQW1QUEN7FI6S5F7J.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/dnssd-7BHOS0BMTXEAAYL2WWCR7RTEE.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "dnssd"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/os.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/os-B6HAYB7ZX7KESRAA6YW1ULI8B.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/os-BLQ1P7IBA600D6KYZQF4JQW2F.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "os"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/os.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/os_object-3BB5S1JBNE7SP98NP5Z5V42X8.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/os_object-CJ658CGW06Q0W17720MA1RMSQ.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "os_object"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/os.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/os_workgroup-DWEYGDABDEYIUYVW56OTXTTCB.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/os_workgroup-EMROX8S5POCF9BN61EMZDXIGQ.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "os_workgroup"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/17\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/ptrauth-2AWEAHO7357XEFIZKM7W3ISB4.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/ptrauth-2AWEAHO7357XEFIZKM7W3ISB4.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ptrauth"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/17\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/ptrcheck-8HPC6MOW01T77UNVPBNQTSCJ6.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/ptrcheck-8HPC6MOW01T77UNVPBNQTSCJ6.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ptrcheck"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/simd\/module.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/simd-VRHSC7M1X33EKG21GC5EE94P.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/simd-AI2AN1D1WIHYOGEUCOJV0AHLH.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "simd"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/iPhoneOS.platform\/Developer\/SDKs\/iPhoneOS.sdk\/usr\/include\/DarwinFoundation2.modulemap",
-    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderApp\/Folder\/build\/SwiftExplicitPrecompiledModules\/sys_types-BOY3ISLHABFTFHLV1Q54U0QX4.pcm",
+    "clangModulePath" : "\/Users\/bartbak\/Repo\/FolderAppiCloud\/folder\/Folder\/build\/SwiftExplicitPrecompiledModules\/sys_types-7NPNODBI79INSHNZ678EQDWJ3.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "sys_types"

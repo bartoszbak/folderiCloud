@@ -1,12 +1,12 @@
 {
-  "/Users/bartbak/Repo/FolderApp/Folder/Folder/AppDelegate.swift" : {
-    "abi-baseline-json" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder.abi.json",
-    "const-values" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.swiftconstvalues",
-    "dependencies" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.d",
-    "diagnostics" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.dia",
-    "objc-header" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-Swift.h",
-    "swiftdoc" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder.swiftdoc",
-    "swiftmodule" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder.swiftmodule",
-    "swiftsourceinfo" : "/Users/bartbak/Repo/FolderApp/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder.swiftsourceinfo"
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/Folder/Data/SwiftData/Mappers/SwiftDataFolderMapper.swift" : {
+    "abi-baseline-json" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder.abi.json",
+    "const-values" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.swiftconstvalues",
+    "dependencies" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.d",
+    "diagnostics" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-primary.dia",
+    "objc-header" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder-Swift.h",
+    "swiftdoc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder.swiftdoc",
+    "swiftmodule" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder.swiftmodule",
+    "swiftsourceinfo" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/Folder.build/Objects-normal/arm64/Folder.swiftsourceinfo"
   }
 }

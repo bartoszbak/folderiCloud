@@ -3,51 +3,49 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 class ShareViewController: UIViewController {
-
-    private let appGroupID = "group.com.bartbak.fastapp.folder"
+    private let writer = ShareInboxWriter()
+    private lazy var hostingController = UIHostingController(
+        rootView: ShareImportProgressView(message: "Preparing your shared items.")
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        guard
-            let defaults = UserDefaults(suiteName: appGroupID),
-            let token = defaults.string(forKey: "shared_token"),
-            let siteData = defaults.data(forKey: "shared_site"),
-            let site = try? JSONDecoder().decode(WordPressSite.self, from: siteData)
-        else {
-            cancelWithError("Not logged in. Please open the app and sign in first.")
-            return
-        }
+        installProgressView()
 
         Task {
             let items = await extractItems()
-            await MainActor.run {
-                let hostingController = UIHostingController(
-                    rootView: ShareComposeView(
-                        token: token,
-                        site: site,
-                        items: items,
-                        onComplete: { [weak self] in
-                            self?.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
-                        },
-                        onCancel: { [weak self] in
-                            self?.cancelWithError(nil)
-                        }
-                    )
-                    .fontDesign(.rounded)
-                )
-                addChild(hostingController)
-                view.addSubview(hostingController.view)
-                hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
-                    hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                    hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                    hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                ])
-                hostingController.didMove(toParent: self)
+
+            if items.isEmpty {
+                await MainActor.run {
+                    self.cancelWithError("No supported share items were found.")
+                }
+                return
+            }
+
+            do {
+                try writer.writeRequest(items)
+                await MainActor.run {
+                    self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+                }
+            } catch {
+                await MainActor.run {
+                    self.cancelWithError(error.localizedDescription)
+                }
             }
         }
+    }
+
+    private func installProgressView() {
+        addChild(hostingController)
+        view.addSubview(hostingController.view)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+        hostingController.didMove(toParent: self)
     }
 
     // MARK: - Cancel
@@ -74,12 +72,12 @@ class ShareViewController: UIViewController {
 
     // MARK: - Extract Items
 
-    func extractItems() async -> [SharedItem] {
+    func extractItems() async -> [SharedImportPayload] {
         guard let inputItems = extensionContext?.inputItems as? [NSExtensionItem] else {
             return []
         }
 
-        var results: [SharedItem] = []
+        var results: [SharedImportPayload] = []
 
         for item in inputItems {
             guard let attachments = item.attachments else { continue }
@@ -87,7 +85,15 @@ class ShareViewController: UIViewController {
             for provider in attachments {
                 if provider.hasItemConformingToTypeIdentifier(UTType.image.identifier) {
                     if let data = await loadImageData(from: provider) {
-                        results.append(.image(data))
+                        let contentType = imageContentType(for: provider)
+                        results.append(
+                            .image(
+                                data: data,
+                                filename: suggestedFilename(for: provider, fallbackExtension: contentType.preferredFilenameExtension ?? "jpg"),
+                                uti: contentType.identifier,
+                                mimeType: contentType.preferredMIMEType ?? "image/jpeg"
+                            )
+                        )
                     }
                 } else if provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
                     if let url = await loadURL(from: provider) {
@@ -106,7 +112,15 @@ class ShareViewController: UIViewController {
                     }
                 } else if provider.hasItemConformingToTypeIdentifier(UTType.data.identifier) {
                     if let fileURL = await loadFile(from: provider) {
-                        results.append(.file(fileURL))
+                        let contentType = UTType(filenameExtension: fileURL.pathExtension) ?? .data
+                        results.append(
+                            .file(
+                                sourceURL: fileURL,
+                                filename: fileURL.lastPathComponent,
+                                uti: contentType.identifier,
+                                mimeType: contentType.preferredMIMEType ?? "application/octet-stream"
+                            )
+                        )
                     }
                 }
             }
@@ -147,5 +161,21 @@ class ShareViewController: UIViewController {
                 continuation.resume(returning: item as? URL)
             }
         }
+    }
+
+    private func imageContentType(for provider: NSItemProvider) -> UTType {
+        provider.registeredTypeIdentifiers
+            .compactMap(UTType.init)
+            .first(where: { $0.conforms(to: .image) }) ?? .jpeg
+    }
+
+    private func suggestedFilename(for provider: NSItemProvider, fallbackExtension: String) -> String {
+        let baseName = provider.suggestedName?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let stem = (baseName?.isEmpty == false ? baseName : "shared-image") ?? "shared-image"
+        let ext = (stem as NSString).pathExtension
+        if ext.isEmpty {
+            return "\(stem).\(fallbackExtension)"
+        }
+        return stem
     }
 }

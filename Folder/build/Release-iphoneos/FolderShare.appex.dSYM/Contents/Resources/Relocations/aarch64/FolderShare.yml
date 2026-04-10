@@ -1,5 +1,5 @@
 ---
 triple:          'arm64-apple-darwin'
-binary-path:     '/Users/bartbak/Repo/FolderApp/Folder/build/Release-iphoneos/FolderShare.appex/FolderShare'
+binary-path:     '/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Release-iphoneos/FolderShare.appex/FolderShare'
 relocations:     []
 ...

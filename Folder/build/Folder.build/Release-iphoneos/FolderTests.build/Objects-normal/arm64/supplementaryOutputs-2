@@ -1,0 +1,12 @@
+{
+  "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/FolderTests/DomainCoreTests.swift" : {
+    "abi-baseline-json" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests.abi.json",
+    "const-values" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests-primary.swiftconstvalues",
+    "dependencies" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests-primary.d",
+    "diagnostics" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests-primary.dia",
+    "objc-header" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests-Swift.h",
+    "swiftdoc" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests.swiftdoc",
+    "swiftmodule" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests.swiftmodule",
+    "swiftsourceinfo" : "/Users/bartbak/Repo/FolderAppiCloud/folder/Folder/build/Folder.build/Release-iphoneos/FolderTests.build/Objects-normal/arm64/FolderTests.swiftsourceinfo"
+  }
+}
